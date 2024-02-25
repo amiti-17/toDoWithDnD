@@ -12,5 +12,5 @@ export default function BoardsSection() {
         })
       }
     </div>
-  )
+  ) // TODO: add default view, when no boards exists...
 }

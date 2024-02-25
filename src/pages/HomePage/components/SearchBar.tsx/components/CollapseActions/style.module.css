@@ -1,0 +1,27 @@
+/* .collapseWrapper {
+  display: flex;
+  flex-flow: row wrap;
+  gap: 15px;
+  width: 100%;
+  margin: auto;
+  justify-content: center;
+  margin-top: 15px;
+} */
+
+.button {
+  padding: 4px 8px;
+  margin: 2px;
+  font-size: inherit;
+  border-radius: var(--form-border-radius);
+  border: 1px solid var(--main-color);
+  background-color: var(--main-background-color);
+  color: inherit;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.button > svg {
+  min-width: 24px;
+  height: auto;
+}

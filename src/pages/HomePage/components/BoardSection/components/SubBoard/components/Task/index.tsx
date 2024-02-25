@@ -13,8 +13,8 @@ export default function Task({ task }: { task: TaskType}) {
     <div className={style.taskWrapper}>
       <TaskTitle title={task.title} />
       <TaskDescription description={task.description} />
-      <TaskManagement />
+      <TaskManagement /> 
     </div>
     
-  )
+  ) // TODO: add some functions to task management...
 }

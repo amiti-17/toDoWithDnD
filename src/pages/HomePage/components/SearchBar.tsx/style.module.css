@@ -1,19 +1,26 @@
 .formWrapper {
-  width: 90%;
-  margin: auto;
+  --header-form-gap: 20px
+}
+
+.formWrapper {
+  /* width: 90%;
+  margin: auto; */
   color: var(--main-color);
+  display: flex;
+  flex-flow: column;
+  align-items: center;
 }
 
 .form {
   width: 100%;
   display: flex;
   justify-content: center;
-  gap: 20px;
+  gap: var(--header-form-gap);
   align-items: center;
   font-size: large;
 }
 
-.form > * {
+.formElements {
   padding: 4px 8px;
   margin: 2px;
   font-size: inherit;
@@ -35,8 +42,22 @@
   outline: 1px solid var(--main-color);
 }
 
+.buttonsWrapper {
+  display: flex;
+  flex-flow: row nowrap;
+  gap: var(--header-form-gap);
+}
+
 .submitButton {
   min-width: 80px;
   width: 15%;
   height: 90%;
+}
+
+.collapseDownIcon {
+  max-height: 90%;
+  height: 90%;
+  min-width: 35px;
+  overflow: hidden;
+  cursor: pointer;
 }
