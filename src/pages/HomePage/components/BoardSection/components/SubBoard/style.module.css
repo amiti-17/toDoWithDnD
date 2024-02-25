@@ -1,0 +1,30 @@
+.toDo {
+  
+}
+
+.inProgress {
+
+}
+
+.done {
+
+}
+
+.title {
+  background-color: antiquewhite;
+  font-size: larger;
+  border-top-left-radius: inherit;
+  border-top-right-radius: inherit;
+  min-height: 40px;
+  text-align: center;
+  padding-top: 9px;
+}
+
+.description {
+
+}
+
+.hr {
+  width: 100%;
+  border: 1px solid var(--main-color);
+}

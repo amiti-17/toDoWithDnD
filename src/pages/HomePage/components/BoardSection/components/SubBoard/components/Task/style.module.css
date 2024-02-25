@@ -1,0 +1,10 @@
+.taskWrapper {
+  width: 90%;
+  margin: auto;
+  margin-bottom: 4px;
+  /* background-color: aquamarine; */
+}
+
+.taskWrapper > div {
+  padding: 5px;
+}

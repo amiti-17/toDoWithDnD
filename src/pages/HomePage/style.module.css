@@ -1,0 +1,4 @@
+.searchBarWrapper {
+  max-width: var(--max-width);
+  margin: auto;
+}

@@ -1,0 +1,19 @@
+.title {
+
+}
+
+.taskTitleWrapper {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: space-between;
+  font-size: large;
+  margin-top: 10px;
+  border-bottom: 1px solid var(--main-color);
+}
+
+.icon {
+  width: 22px;
+  height: auto;
+  cursor: pointer;
+}

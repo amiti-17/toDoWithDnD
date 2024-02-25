@@ -1,0 +1,42 @@
+.formWrapper {
+  width: 90%;
+  margin: auto;
+  color: var(--main-color);
+}
+
+.form {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  align-items: center;
+  font-size: large;
+}
+
+.form > * {
+  padding: 4px 8px;
+  margin: 2px;
+  font-size: inherit;
+  border-radius: var(--form-border-radius);
+  border: 1px solid var(--main-color);
+  background-color: var(--main-background-color);
+  color: inherit;
+}
+
+.input {
+  width: 60%;
+}
+
+.input::placeholder {
+  color: var(--main-color);
+}
+
+.input:focus {
+  outline: 1px solid var(--main-color);
+}
+
+.submitButton {
+  min-width: 80px;
+  width: 15%;
+  height: 90%;
+}

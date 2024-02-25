@@ -1,0 +1,19 @@
+.boardWrapper {
+  width: 90%;
+  margin: auto;
+  color: var(--main-color);
+  display: flex;
+  flex-flow: row wrap;
+  gap: 15px;
+  justify-content: space-around;
+  margin-top: 30px;
+}
+
+.boardWrapper > div {
+  width: 30%;
+  min-height: 80px;
+  min-width: 200px;
+  background-color: aliceblue;
+  border-radius: 20px;
+}
+
