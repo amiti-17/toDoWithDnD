@@ -4,10 +4,12 @@ import style from "./style.module.css";
 
 export default function BoardsSection() {
 
+  const boardColumns = Object.keys(columnNames) as (keyof ColumnNamesType)[];
+
   return (
     <div className={style.boardWrapper}>
       {
-        (Object.keys(columnNames) as (keyof ColumnNamesType)[]).map(key => {
+        boardColumns.map(key => {
           return <SubBoard title={key} key={key} />
         })
       }

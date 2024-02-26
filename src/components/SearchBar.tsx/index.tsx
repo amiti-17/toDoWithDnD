@@ -3,7 +3,7 @@
 import { FormEvent, useState } from "react";
 import style from "./style.module.css";
 import { TbLayoutBottombarCollapseFilled } from "react-icons/tb";
-import CollapseActions from "./components/CollapseActions";
+import CollapseActions from "./CollapseActions";
 
 export default function SearchBar() {
 
