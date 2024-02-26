@@ -41,24 +41,3 @@
 .input:focus {
   outline: 1px solid var(--main-color);
 }
-
-.buttonsWrapper {
-  display: flex;
-  flex-flow: row nowrap;
-  gap: var(--header-form-gap);
-}
-
-.submitButton {
-  min-width: 80px;
-  width: 15%;
-  height: 90%;
-}
-
-.collapseDownIcon {
-  max-height: 90%;
-  height: 90%;
-  min-width: 35px;
-  overflow: hidden;
-  cursor: pointer;
-  color: var()
-}
