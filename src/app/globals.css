@@ -7,6 +7,8 @@
 
   --main-color: rgb(90, 54, 6);
   --main-background-color: white;
+  --header-background-color: rgb(255, 251, 188);
+  --secondary-background-color: rgb(251, 253, 230);
   --form-border-radius: 20px;
 
   --foreground-rgb: 0, 0, 0;
@@ -46,6 +48,11 @@
 
 @media (prefers-color-scheme: dark) {
   :root { 
+    --main-color: rgb(142, 86, 14);
+    --main-background-color: rgb(186, 182, 161);
+    --header-background-color: rgb(189, 186, 133);
+    --secondary-background-color: rgb(255, 235, 197);
+
     --foreground-rgb: 255, 255, 255;
     --background-start-rgb: 0, 0, 0;
     --background-end-rgb: 0, 0, 0;

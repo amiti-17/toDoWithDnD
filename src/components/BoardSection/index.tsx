@@ -1,5 +1,5 @@
 import { ColumnNamesType, columnNames } from "@/config/system/columnNames";
-import SubBoard from "./components/SubBoard";
+import SubBoard from "./SubBoard";
 import style from "./style.module.css";
 
 export default function BoardsSection() {

@@ -2,9 +2,9 @@
 import style from "./style.module.css";
 
 import { TaskType } from "@/config/system/types/sampleBoard";
-import TaskTitle from "./components/TaskTitle";
-import TaskDescription from "./components/TaskDescription";
-import TaskManagement from "./components/TaskManagement";
+import TaskTitle from "./TaskTitle";
+import TaskDescription from "./TaskDescription";
+import TaskManagement from "./TaskManagement";
 
 
 export default function Task({ task }: { task: TaskType}) {

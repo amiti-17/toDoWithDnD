@@ -11,7 +11,7 @@
 }
 
 .title {
-  background-color: antiquewhite;
+  background-color: var(--header-background-color);
   font-size: larger;
   border-top-left-radius: inherit;
   border-top-right-radius: inherit;

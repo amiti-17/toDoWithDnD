@@ -1,9 +1,9 @@
 'use client'
 
-import { use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { BoardType, sampleBoard } from "@/config/system/types/sampleBoard";
-import BoardsSection from "./components/BoardSection";
-import SearchBar from "./components/SearchBar.tsx";
+import BoardsSection from "@/components/BoardSection";
+import SearchBar from "@/components/SearchBar.tsx";
 import { BoardContext } from "./hooks/useBoardContext";
 import style from "./style.module.css";
 

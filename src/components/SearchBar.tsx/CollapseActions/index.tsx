@@ -8,7 +8,7 @@ export default function CollapseActions({ isOpened }: { isOpened: boolean }) {
 
   const { getCollapseProps } = useCollapse({ isExpanded: isOpened });
 
-  return ( // TODO: figure out why collapse didn't work property
+  return (
     <div {...getCollapseProps()}>
       <div className={style.collapseWrapper}>
         <button className={style.button}>
