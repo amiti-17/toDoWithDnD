@@ -1,4 +1,4 @@
-/* .collapseWrapper {
+.collapseWrapper {
   display: flex;
   flex-flow: row wrap;
   gap: 15px;
@@ -6,7 +6,7 @@
   margin: auto;
   justify-content: center;
   margin-top: 15px;
-} */
+}
 
 .button {
   padding: 4px 8px;
