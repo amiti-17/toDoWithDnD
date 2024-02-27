@@ -1,13 +1,10 @@
-
 import { useContext, useEffect } from "react";
 import { BoardContext } from "@/pages/Home/hooks/useBoardContext";
-import { ColumnNamesType, columnNames } from "@/config/system/columnNames";
+import { columnNamesArr } from "@/config/system/columnNames";
 import style from "./style.module.css";
-import Task from "../../Task";
+import Task from "@/components/Task";
 
-
-export default function SubBoard({title}: { title: keyof ColumnNamesType}) {
-
+export default function SubBoard({ columnId }: { columnId: number }) {
   const { board } = useContext(BoardContext);
 
   useEffect(() => {
@@ -15,20 +12,18 @@ export default function SubBoard({title}: { title: keyof ColumnNamesType}) {
   }, [board]);
 
   return (
-    <div className={style[title]}>
-      <div className={style.title}>{columnNames[title]}</div>
+    <div className={style[columnNamesArr[columnId].title]}>
+      <div className={style.title}>{columnNamesArr[columnId].display}</div>
       <div className={style.description}>
-        {
-          board[title].map((task, i, arr) => {
-            return (
-              <>
-                <Task task={task} key={task._id.toString()} />
-                { arr.length - 1 !== i && (<hr className={style.hr} />) }
-              </>
-            )
-          })
-        }
+        {board[columnNamesArr[columnId].title].map((task, i, arr) => {
+          return (
+            <>
+              <Task task={task} key={task._id.toString()} />
+              {arr.length - 1 !== i && <hr className={style.hr} />}
+            </>
+          );
+        })}
       </div>
     </div>
-  )
+  );
 }

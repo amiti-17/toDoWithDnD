@@ -1,20 +1,38 @@
 export type NamesType = {
-  [index: string]: string,
-}
+  [index: string]: string;
+};
 
-export type ColumnNamesType = {
-  toDo: 'To do',
-  inProgress: 'In progress',
-  done: 'Done',
-}
+export type ColumnNamesType = [
+  {
+    title: "toDo";
+    display: "To do";
+  },
+  {
+    title: "inProgress";
+    display: "In progress";
+  },
+  {
+    title: "done";
+    display: "Done";
+  }
+];
 
-export const columnNames: ColumnNamesType = {
-  toDo: 'To do',
-  inProgress: 'In progress',
-  done: 'Done',
-}
+export const columnNamesArr: ColumnNamesType = [
+  {
+    title: "toDo",
+    display: "To do",
+  },
+  {
+    title: "inProgress",
+    display: "In progress",
+  },
+  {
+    title: "done",
+    display: "Done",
+  },
+];
 
-export const firstAndLastColumnNames: NamesType = {
-  first: 'toDo',
-  last: 'done',
-}
+// export const firstAndLastColumnNames: NamesType = {
+//   first: "toDo",
+//   last: "done",
+// };
