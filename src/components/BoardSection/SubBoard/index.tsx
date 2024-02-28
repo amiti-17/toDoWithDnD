@@ -8,7 +8,7 @@ export default function SubBoard({ columnId }: { columnId: number }) {
   const { board } = useContext(BoardContext);
 
   useEffect(() => {
-    console.log(board);
+    console.log("in subBoard", board);
   }, [board]);
 
   return (

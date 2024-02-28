@@ -1,4 +1,4 @@
-import { ColumnNamesType, columnNamesArr } from "@/config/system/columnNames";
+import { columnNamesArr } from "@/config/system/columnNames";
 import SubBoard from "./SubBoard";
 import style from "./style.module.css";
 
