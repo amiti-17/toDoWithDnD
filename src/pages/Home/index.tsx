@@ -6,7 +6,7 @@ import BoardsSection from "@/components/BoardSection";
 import SearchBar from "@/components/SearchBar.tsx";
 import { BoardContext } from "./hooks/useBoardContext";
 import style from "./style.module.css";
-import getInitialBoard from "@/mongoDB/queries/board/getInitialBoard";
+import getInitialBoard from "@/mongoDB/queries/board/getInitial";
 
 export default function Home() {
   const [board, setBoard] = useState<BoardType>(sampleBoard);
