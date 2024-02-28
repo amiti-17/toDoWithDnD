@@ -6,19 +6,30 @@ type ButtonsGroupType = {
   setCollapseIsOpen: React.Dispatch<SetStateAction<boolean>>;
   styleFromElements: string;
   disabled: boolean;
+  handleSubmit: () => void;
 };
-
 export default function ButtonsGroup({
   setCollapseIsOpen,
   styleFromElements,
   disabled,
+  handleSubmit,
 }: ButtonsGroupType) {
+  // console.log(disabled);
+
+  const handleFormSubmit = () => {
+    handleSubmit();
+  };
+
   return (
     <div className={style.buttonsWrapper}>
       <button
         type="submit"
         className={`${styleFromElements} ${style.submitButton}`}
         disabled={disabled}
+        onClick={() => {
+          // console.log("handleSubmit");
+          handleFormSubmit();
+        }}
       >
         Search
       </button>

@@ -1,20 +1,37 @@
 "use client";
 
-import { FormEvent, useState } from "react";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import style from "./style.module.css";
 import CollapseActions from "./CollapseActions";
 import ButtonsGroup from "./ButtonsGroup";
 import mongoose from "mongoose";
-import { Formik } from "formik";
+import { Formik, FormikErrors } from "formik";
+import dbAPI from "@/dbAPI";
+import { BoardType } from "@/config/system/types/sampleBoard";
 
-export default function SearchBar() {
-  const onSubmit = async (
-    value: { idField: string }
-    // event: FormEvent<HTMLFormElement>
+type SearchBarType = {
+  currentId: string;
+  setBoard: React.Dispatch<React.SetStateAction<BoardType>>;
+};
+
+export default function SearchBar({ currentId, setBoard }: SearchBarType) {
+  const router = useRouter();
+
+  const onSubmitForm = async (
+    value: { idField: string },
+    errors: FormikErrors<{
+      idField: string;
+    }>
   ) => {
-    console.log(event);
-    // event.preventDefault();
-  }; // TODO: should be implemented
+    console.log("submit is triggered");
+    if (!errors.idField) {
+      const newBoard = await dbAPI.find(value.idField);
+      if (newBoard?._id.toString() !== currentId) {
+        router.push("/boards/" + newBoard._id);
+      }
+    }
+  };
 
   const [collapseIsOpen, setCollapseIsOpen] = useState<boolean>(false);
 
@@ -34,15 +51,20 @@ export default function SearchBar() {
         initialValues={{ idField: "" }}
         validate={(values: { idField: string }) => {
           const errors: { [index: string]: string } = {};
-          if (!values.idField) {
-            errors.idField = "Required";
-          } else if (!mongoose.isValidObjectId(values.idField)) {
+          try {
+            errors.idField = mongoose.Types.ObjectId.isValid(values.idField)
+              ? ""
+              : "Invalid input, should be 12 byte string, or 24 character hex string";
+          } catch (error) {
             errors.idField =
               "Invalid input, should be 12 byte string, or 24 character hex string";
           }
+          console.log("current errors: ", errors);
           return errors;
         }}
-        onSubmit={(values) => onSubmit(values)}
+        onSubmit={() => {
+          console.log("submit!");
+        }}
       >
         {({
           values,
@@ -52,20 +74,24 @@ export default function SearchBar() {
           handleBlur,
           handleSubmit,
           isSubmitting,
-          /* and other goodies */
         }) => (
           <form onSubmit={handleSubmit} className={style.form}>
-            <input
-              type="email"
-              name="email"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.idField}
-              className={`${style.input} ${style.formElements}`}
-              placeholder="Search board by id..."
-            />
-            {errors.idField && touched.idField && errors.idField}
+            <div className={style.inputWrapper}>
+              <input
+                type="text"
+                name="idField"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.idField}
+                className={`${style.input} ${style.formElements}`}
+                placeholder="Search board by id..."
+              />
+              <div className={style.errorWrapper}>
+                {touched.idField && errors.idField}
+              </div>
+            </div>
             <ButtonsGroup
+              handleSubmit={() => onSubmitForm(values, errors)}
               setCollapseIsOpen={setCollapseIsOpen}
               styleFromElements={style.formElements}
               disabled={isSubmitting}

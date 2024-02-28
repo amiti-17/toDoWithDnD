@@ -1,5 +1,5 @@
 .formWrapper {
-  --header-form-gap: 20px
+  --header-form-gap: 20px;
 }
 
 .formWrapper {
@@ -30,8 +30,17 @@
   color: inherit;
 }
 
-.input {
+.inputWrapper {
+  height: auto;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-items: center;
   width: 60%;
+}
+
+.input {
+  width: 100%;
 }
 
 .input::placeholder {
@@ -40,4 +49,10 @@
 
 .input:focus {
   outline: 1px solid var(--main-color);
+}
+
+.errorWrapper {
+  width: 100%;
+  text-align: left;
+  height: auto;
 }

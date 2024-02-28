@@ -43,7 +43,7 @@ export default function Home({ id }: { id: string | undefined }) {
 
   return (
     <div className={style.searchBarWrapper}>
-      <SearchBar />
+      <SearchBar currentId={board._id.toString()} setBoard={setBoard} />
       <BoardsSection board={board} />
     </div>
   );
