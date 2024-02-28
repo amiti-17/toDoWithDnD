@@ -2,20 +2,24 @@
 
 import { useContext, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { defaultBoard } from "@/config/system/types/sampleBoard";
+import {
+  BoardType,
+  defaultBoard,
+  sampleBoard,
+} from "@/config/system/types/sampleBoard";
 import BoardsSection from "@/components/BoardSection";
 import SearchBar from "@/components/SearchBar.tsx";
 import { BoardContext } from "./hooks/useBoardContext";
 import style from "./style.module.css";
 import dbAPI from "@/dbAPI";
 
-export default function Home({ id }: { id: string }) {
-  const { board, setBoard } = useContext(BoardContext);
+export default function Home({ id }: { id: string | undefined }) {
+  const [board, setBoard] = useState<BoardType>(sampleBoard);
   const router = useRouter();
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    console.log(id, board._id.toString());
+    // console.log(id, board._id.toString());
     (async () => {
       if (id === undefined) {
         const myBoard = await dbAPI.getInitial();
@@ -37,16 +41,10 @@ export default function Home({ id }: { id: string }) {
     })();
   }, [id, board]);
 
-  useEffect(() => {
-    console.log(board);
-  }, [board]);
-
   return (
     <div className={style.searchBarWrapper}>
-      <BoardContext.Provider value={{ board, setBoard }}>
-        <SearchBar />
-        <BoardsSection />
-      </BoardContext.Provider>
+      <SearchBar />
+      <BoardsSection board={board} />
     </div>
   );
 }

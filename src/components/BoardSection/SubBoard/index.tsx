@@ -1,21 +1,22 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { BoardContext } from "@/pages/Home/hooks/useBoardContext";
 import { columnNamesArr } from "@/config/system/columnNames";
 import style from "./style.module.css";
 import Task from "@/components/Task";
+import { TaskType } from "@/config/system/types/sampleBoard";
 
-export default function SubBoard({ columnId }: { columnId: number }) {
+type SubBoardType = {
+  columnId: number;
+  subBoard: TaskType[];
+};
+
+export default function SubBoard({ columnId, subBoard }: SubBoardType) {
   const { board } = useContext(BoardContext);
-
-  useEffect(() => {
-    console.log("in subBoard", board);
-  }, [board]);
-
   return (
     <div className={style[columnNamesArr[columnId].title]}>
       <div className={style.title}>{columnNamesArr[columnId].display}</div>
       <div className={style.description}>
-        {board[columnNamesArr[columnId].title].map((task, i, arr) => {
+        {subBoard.map((task, i, arr) => {
           if (!task?._id.toString()) return <></>;
           return (
             <React.Fragment key={task?._id.toString()}>
