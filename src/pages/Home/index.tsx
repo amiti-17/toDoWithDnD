@@ -17,6 +17,7 @@ export default function Home({ id }: { id: string | undefined }) {
   const [board, setBoard] = useState<BoardType>(sampleBoard);
   const router = useRouter();
   const [loading, setLoading] = useState(true);
+  const [isDeleted, setIsDeleted] = useState<boolean>(false);
 
   useEffect(() => {
     // console.log(id, board._id.toString());
@@ -43,8 +44,8 @@ export default function Home({ id }: { id: string | undefined }) {
 
   return (
     <div className={style.searchBarWrapper}>
-      <SearchBar currentId={board._id.toString()} setBoard={setBoard} />
-      <BoardsSection board={board} />
+      <SearchBar currentId={board._id.toString()} setBoard={setBoard} setIsDeleted={setIsDeleted} />
+      <BoardsSection board={board} isDeleted={isDeleted} />
     </div>
   );
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import style from "./style.module.css";
 import CollapseActions from "./CollapseActions";
@@ -13,9 +13,10 @@ import { BoardType } from "@/config/system/types/sampleBoard";
 type SearchBarType = {
   currentId: string;
   setBoard: React.Dispatch<React.SetStateAction<BoardType>>;
+  setIsDeleted: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-export default function SearchBar({ currentId, setBoard }: SearchBarType) {
+export default function SearchBar({ currentId, setIsDeleted }: SearchBarType) {
   const router = useRouter();
 
   const onSubmitForm = async (
@@ -99,7 +100,7 @@ export default function SearchBar({ currentId, setBoard }: SearchBarType) {
           </form>
         )}
       </Formik>
-      <CollapseActions isOpened={collapseIsOpen} />
+      <CollapseActions isOpened={collapseIsOpen} setIsDeleted={setIsDeleted} />
     </header>
   );
 }
