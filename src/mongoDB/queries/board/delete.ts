@@ -1,9 +1,7 @@
 import { BoardType, defaultBoard } from "@/config/system/types/sampleBoard";
 import mongoose from "mongoose";
 
-export default async function deleteOneById(
-  id: mongoose.Types.ObjectId
-): Promise<BoardType> {
+export default async function deleteOneById(id: string): Promise<BoardType> {
   try {
     const data = await fetch(`/api/boards?id=${id}`, {
       method: "DELETE",

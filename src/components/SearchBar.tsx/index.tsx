@@ -100,7 +100,7 @@ export default function SearchBar({ currentId, setIsDeleted }: SearchBarType) {
           </form>
         )}
       </Formik>
-      <CollapseActions isOpened={collapseIsOpen} setIsDeleted={setIsDeleted} />
+      <CollapseActions isOpened={collapseIsOpen} setIsDeleted={setIsDeleted} currentId={currentId} />
     </header>
   );
 }
