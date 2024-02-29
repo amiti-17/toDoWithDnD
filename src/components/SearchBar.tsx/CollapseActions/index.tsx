@@ -1,9 +1,9 @@
 import { useCollapse } from "react-collapsed";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { MdCreateNewFolder, MdFolderDelete } from "react-icons/md";
 import style from "./style.module.css";
-import { useState } from "react";
 import dbAPI from "@/dbAPI";
-import { useRouter } from "next/navigation";
 
 type CollapseActionsType = {
   isOpened: boolean;

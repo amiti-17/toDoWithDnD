@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useRouter } from "next/navigation";
 import style from "./style.module.css";
 import CollapseActions from "./CollapseActions";
@@ -9,15 +9,18 @@ import mongoose from "mongoose";
 import { Formik, FormikErrors } from "formik";
 import dbAPI from "@/dbAPI";
 import { BoardType } from "@/config/system/types/sampleBoard";
+import { BoardContext } from "@/pages/Home/hooks/useBoardContext";
 
 type SearchBarType = {
-  currentId: string;
-  setBoard: React.Dispatch<React.SetStateAction<BoardType>>;
+  // currentId: string;
+  // setBoard: React.Dispatch<React.SetStateAction<BoardType>>;
   setIsDeleted: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-export default function SearchBar({ currentId, setIsDeleted }: SearchBarType) {
+export default function SearchBar({ setIsDeleted }: SearchBarType) {
   const router = useRouter();
+  const { board } = useContext(BoardContext);
+  const currentId = board._id.toString();
 
   const onSubmitForm = async (
     value: { idField: string },
@@ -100,7 +103,11 @@ export default function SearchBar({ currentId, setIsDeleted }: SearchBarType) {
           </form>
         )}
       </Formik>
-      <CollapseActions isOpened={collapseIsOpen} setIsDeleted={setIsDeleted} currentId={currentId} />
+      <CollapseActions
+        isOpened={collapseIsOpen}
+        setIsDeleted={setIsDeleted}
+        currentId={currentId}
+      />
     </header>
   );
 }

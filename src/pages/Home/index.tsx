@@ -20,6 +20,10 @@ export default function Home({ id }: { id: string | undefined }) {
   const [isDeleted, setIsDeleted] = useState<boolean>(false);
 
   useEffect(() => {
+    console.log("from context component", board);
+  }, [board]);
+
+  useEffect(() => {
     // console.log(id, board._id.toString());
     (async () => {
       if (id === undefined) {
@@ -43,9 +47,13 @@ export default function Home({ id }: { id: string | undefined }) {
   }, [id, board]);
 
   return (
-    <div className={style.searchBarWrapper}>
-      <SearchBar currentId={board._id.toString()} setBoard={setBoard} setIsDeleted={setIsDeleted} />
-      <BoardsSection board={board} isDeleted={isDeleted} />
-    </div>
+    <BoardContext.Provider value={{ board, setBoard }}>
+      <div className={style.searchBarWrapper}>
+        <SearchBar
+          setIsDeleted={setIsDeleted}
+        />
+        <BoardsSection board={board} isDeleted={isDeleted} />
+      </div>
+    </BoardContext.Provider>
   );
 }
