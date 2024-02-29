@@ -14,21 +14,19 @@ import style from "./style.module.css";
 import dbAPI from "@/dbAPI";
 
 export default function Home({ id }: { id: string | undefined }) {
-  const [board, setBoard] = useState<BoardType>(sampleBoard);
+  let [board, setBoard] = useState<BoardType>(sampleBoard);
   const router = useRouter();
   const [loading, setLoading] = useState(true);
   const [isDeleted, setIsDeleted] = useState<boolean>(false);
 
   useEffect(() => {
-    console.log("from context component", board);
+    console.log("from home component", board);
   }, [board]);
 
   useEffect(() => {
-    // console.log(id, board._id.toString());
     (async () => {
       if (id === undefined) {
         const myBoard = await dbAPI.getInitial();
-        console.log(myBoard);
         setBoard(myBoard ?? defaultBoard);
         if (myBoard) {
           router.push("/boards/" + myBoard._id.toString());
@@ -38,7 +36,6 @@ export default function Home({ id }: { id: string | undefined }) {
       if (id && id !== board._id.toString()) {
         const myBoard = await dbAPI.find(id);
         if (board._id.toString() !== myBoard._id.toString()) {
-          console.log("is board set", myBoard);
           setBoard(myBoard);
           router.push("/boards/" + id);
         }
@@ -49,9 +46,7 @@ export default function Home({ id }: { id: string | undefined }) {
   return (
     <BoardContext.Provider value={{ board, setBoard }}>
       <div className={style.searchBarWrapper}>
-        <SearchBar
-          setIsDeleted={setIsDeleted}
-        />
+        <SearchBar setIsDeleted={setIsDeleted} />
         <BoardsSection board={board} isDeleted={isDeleted} />
       </div>
     </BoardContext.Provider>

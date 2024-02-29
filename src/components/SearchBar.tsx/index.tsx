@@ -8,7 +8,6 @@ import ButtonsGroup from "./ButtonsGroup";
 import mongoose from "mongoose";
 import { Formik, FormikErrors } from "formik";
 import dbAPI from "@/dbAPI";
-import { BoardType } from "@/config/system/types/sampleBoard";
 import { BoardContext } from "@/pages/Home/hooks/useBoardContext";
 
 type SearchBarType = {

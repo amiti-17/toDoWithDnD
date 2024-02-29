@@ -1,31 +1,44 @@
 import React, { useContext } from "react";
+import { MdLibraryAdd } from "react-icons/md";
 import { BoardContext } from "@/pages/Home/hooks/useBoardContext";
 import { columnNamesArr } from "@/config/system/columnNames";
-import style from "./style.module.css";
-import Task from "@/components/Task";
 import { TaskType } from "@/config/system/types/sampleBoard";
+import Task from "@/components/Task";
+import style from "./style.module.css";
 
 type SubBoardType = {
   columnId: number;
-  subBoard: TaskType[];
+  columnName: string;
 };
 
-export default function SubBoard({ columnId, subBoard }: SubBoardType) {
+export default function SubBoard({ columnId, columnName }: SubBoardType) {
   const { board } = useContext(BoardContext);
+  console.log("from subBoard", board, board[columnNamesArr[columnId].title]);
   return (
     <div className={style[columnNamesArr[columnId].title]}>
       <div className={style.title}>{columnNamesArr[columnId].display}</div>
       <div className={style.description}>
-        {subBoard.map((task, i, arr) => {
+        {board[columnNamesArr[columnId].title].map((task, i, arr) => {
+          // console.log(task, i);
           if (!task?._id.toString()) return <></>;
           return (
             <React.Fragment key={task?._id.toString()}>
-              <Task task={task} key={task?._id.toString()} />
+              <Task
+                columnId={columnId}
+                task={task}
+                taskIndex={i}
+                key={task?._id.toString()}
+              />
               {arr.length - 1 !== i && <hr className={style.hr} />}
             </React.Fragment>
           );
         })}
       </div>
+      {!columnId && (
+        <div className={style.taskCommand}>
+          <MdLibraryAdd title="add new task" />
+        </div>
+      )}
     </div>
   );
 }
