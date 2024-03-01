@@ -1,6 +1,6 @@
-import { Board } from "@/mongoDB/models/boardsAndTasks";
-import connectToMongoDb from "@/mongoDB/connect";
 import mongoose from "mongoose";
+import connectToMongoDb from "@/mongoDB/connect";
+import { Board } from "@/mongoDB/models/boardsAndTasks";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function PUT(
@@ -16,10 +16,11 @@ export async function PUT(
   return NextResponse.json({ board: updatedBoard }, { status: 200 });
 }
 
-export async function GET(
-  request: NextRequest,
-  { params }: { params: { id: mongoose.Types.ObjectId } }
-) {
+export async function GET({
+  params,
+}: {
+  params: { id: mongoose.Types.ObjectId };
+}) {
   const { id } = params;
   await connectToMongoDb();
   const board = await Board.findById(id);
