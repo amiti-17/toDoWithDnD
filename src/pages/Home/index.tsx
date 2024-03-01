@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import {
+  BoardErrorType,
   BoardType,
   defaultBoard,
   sampleBoard,
@@ -15,6 +16,7 @@ import dbAPI from "@/dbAPI";
 
 export default function Home({ id }: { id: string | undefined }) {
   const [board, setBoard] = useState<BoardType>(sampleBoard);
+  const [error, setError] = useState<string>("");
   const [isBoardShouldUpdate, setIsBoardShouldUpdate] =
     useState<boolean>(false);
   const router = useRouter();
@@ -26,7 +28,7 @@ export default function Home({ id }: { id: string | undefined }) {
     if (isBoardShouldUpdate) {
       (async () => {
         if (id) {
-          const newBoard = await dbAPI.update(id, board);
+          const newBoard: BoardType = await dbAPI.update(id, board);
           setBoard(newBoard);
         }
       })();
@@ -37,7 +39,12 @@ export default function Home({ id }: { id: string | undefined }) {
   useEffect(() => {
     (async () => {
       if (id === undefined) {
-        const myBoard = await dbAPI.getInitial();
+        const myProbablyBoard = await dbAPI.getInitial();
+        if ((myProbablyBoard as unknown as BoardErrorType)?.error) {
+          setError((myProbablyBoard as unknown as BoardErrorType).error);
+          return;
+        }
+        const myBoard = myProbablyBoard as BoardType;
         setBoard(myBoard ?? defaultBoard);
         if (myBoard) {
           router.push("/boards/" + myBoard._id.toString());
@@ -46,7 +53,7 @@ export default function Home({ id }: { id: string | undefined }) {
       }
       if (id && id !== board._id.toString()) {
         const myBoard = await dbAPI.find(id);
-        if (board._id.toString() !== myBoard._id.toString()) {
+        if (board._id.toString() !== myBoard?._id.toString()) {
           setBoard(myBoard);
           router.push("/boards/" + id);
         }
@@ -60,7 +67,7 @@ export default function Home({ id }: { id: string | undefined }) {
     >
       <div className={style.searchBarWrapper}>
         <SearchBar setIsDeleted={setIsDeleted} />
-        <BoardsSection board={board} isDeleted={isDeleted} />
+        {<BoardsSection isDeleted={isDeleted} error={error} />}
       </div>
     </BoardContext.Provider>
   );

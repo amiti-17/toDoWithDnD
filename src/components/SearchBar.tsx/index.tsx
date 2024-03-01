@@ -17,7 +17,7 @@ type SearchBarType = {
 export default function SearchBar({ setIsDeleted }: SearchBarType) {
   const router = useRouter();
   const { board } = useContext(BoardContext);
-  const currentId = board._id.toString();
+  console.log(board);
 
   const onSubmitForm = async (
     value: { idField: string },
@@ -28,7 +28,7 @@ export default function SearchBar({ setIsDeleted }: SearchBarType) {
     console.log("submit is triggered");
     if (!errors?.idField) {
       const newBoard = await dbAPI.find(value.idField);
-      if (newBoard?._id.toString() !== currentId) {
+      if (newBoard?._id && newBoard?._id.toString() !== board._id.toString()) {
         router.push("/boards/" + newBoard._id);
       }
     }
@@ -95,7 +95,7 @@ export default function SearchBar({ setIsDeleted }: SearchBarType) {
       <CollapseActions
         isOpened={collapseIsOpen}
         setIsDeleted={setIsDeleted}
-        currentId={currentId}
+        currentId={board?._id?.toString()}
       />
     </header>
   );

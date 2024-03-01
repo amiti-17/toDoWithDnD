@@ -13,6 +13,10 @@ export type BoardType = {
   _id: mongoose.Types.ObjectId;
 };
 
+export type BoardErrorType = {
+  error: string;
+};
+
 export const sampleBoard: BoardType = {
   toDo: [],
   inProgress: [],

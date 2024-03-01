@@ -16,11 +16,10 @@ export async function PUT(
   return NextResponse.json({ board: updatedBoard }, { status: 200 });
 }
 
-export async function GET({
-  params,
-}: {
-  params: { id: mongoose.Types.ObjectId };
-}) {
+export async function GET(
+  request: NextRequest,
+  { params }: { params: { id: mongoose.Types.ObjectId | string } }
+) {
   const { id } = params;
   await connectToMongoDb();
   const board = await Board.findById(id);

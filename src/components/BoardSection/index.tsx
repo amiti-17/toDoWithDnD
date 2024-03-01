@@ -1,20 +1,25 @@
 import { useContext } from "react";
 import { DragDropContext, OnDragEndResponder } from "@hello-pangea/dnd";
 import SubBoard from "./SubBoard";
-import { BoardType } from "@/config/system/types/sampleBoard";
 import { columnNamesArr } from "@/config/system/columnNames";
 import { BoardContext } from "@/pages/Home/hooks/useBoardContext";
 import style from "./style.module.css";
 
 type BoardsSectionType = {
-  board: BoardType;
   isDeleted: boolean;
+  error: string;
 };
 
-export default function BoardsSection({ isDeleted }: BoardsSectionType) {
+export default function BoardsSection({ isDeleted, error }: BoardsSectionType) {
   const { board, setBoard, setIsBoardShouldUpdate } = useContext(BoardContext);
   if (isDeleted) {
     return <div>This board was deleted</div>;
+  }
+  if (error) {
+    return <div>{error}</div>;
+  }
+  if (board?._id === undefined) {
+    return <div>{"This board doesn't exists"}</div>;
   }
   // const template = { // how OnDragEndResponder props looks like
   //   combine: null,

@@ -1,4 +1,5 @@
-import { BoardType } from "@/config/system/types/sampleBoard";
+import { BoardType, defaultBoard } from "@/config/system/types/sampleBoard";
+import mongoose from "mongoose";
 
 export default async function findOne(id: string): Promise<BoardType> {
   try {
@@ -10,7 +11,7 @@ export default async function findOne(id: string): Promise<BoardType> {
     console.log(myData.board);
     return myData.board;
   } catch (error) {
-    console.warn("We couldn't fetch initial board in getInitial", error);
+    console.warn("We couldn't fetch initial board in findOne", error);
     throw error;
   }
 }
