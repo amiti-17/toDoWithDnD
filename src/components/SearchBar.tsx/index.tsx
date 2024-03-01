@@ -28,7 +28,7 @@ export default function SearchBar({ setIsDeleted }: SearchBarType) {
     }>
   ) => {
     console.log("submit is triggered");
-    if (!errors.idField) {
+    if (!errors?.idField) {
       const newBoard = await dbAPI.find(value.idField);
       if (newBoard?._id.toString() !== currentId) {
         router.push("/boards/" + newBoard._id);
@@ -65,8 +65,10 @@ export default function SearchBar({ setIsDeleted }: SearchBarType) {
           console.log("current errors: ", errors);
           return errors;
         }}
-        onSubmit={() => {
-          console.log("submit!");
+        onSubmit={(values, { setSubmitting }) => {
+          console.log("search was triggered");
+          onSubmitForm(values, {});
+          setSubmitting(false);
         }}
       >
         {({

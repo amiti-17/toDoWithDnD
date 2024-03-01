@@ -5,6 +5,7 @@ export default async function deleteOneById(id: string): Promise<BoardType> {
   try {
     const data = await fetch(`/api/boards?id=${id}`, {
       method: "DELETE",
+      cache: 'no-cache',
     });
     if (data.status === 405) {
       throw new Error("Operation not allowed");

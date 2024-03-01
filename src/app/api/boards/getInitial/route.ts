@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import connectToMongoDb from "@/mongoDB";
-import Board from "@/mongoDB/models/boards";
+import { Board } from "@/mongoDB/models/boardsAndTasks";
 
 export async function GET() {
   await connectToMongoDb();

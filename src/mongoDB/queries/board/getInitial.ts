@@ -4,6 +4,7 @@ export default async function getInitial(): Promise<BoardType | undefined> {
   try {
     const data = await fetch("/api/boards/getInitial", {
       method: "GET",
+      cache: "no-cache",
     });
     return (await data.json()).board;
   } catch (error) {

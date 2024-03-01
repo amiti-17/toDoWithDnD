@@ -1,4 +1,4 @@
-import Board from "@/mongoDB/models/boards";
+import { Board } from "@/mongoDB/models/boardsAndTasks";
 import connectToMongoDb from "@/mongoDB";
 import mongoose from "mongoose";
 import { NextRequest, NextResponse } from "next/server";

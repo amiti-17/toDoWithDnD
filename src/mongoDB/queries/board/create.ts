@@ -1,10 +1,10 @@
 import { BoardType, defaultBoard } from "@/config/system/types/sampleBoard";
-import connectToMongoDb from "@/mongoDB";
 
 export default async function create(): Promise<BoardType> {
   try {
     const data = await fetch("/api/boards", {
       method: "POST",
+      cache: "no-cache",
       body: JSON.stringify({
         toDo: [],
         inProgress: [],

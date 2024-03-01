@@ -4,6 +4,7 @@ export default async function findAll(): Promise<BoardType[]> {
   try {
     const data = await fetch("/api/boards", {
       method: "GET",
+      cache: "no-cache",
     });
     return (await data.json()).boards;
   } catch (error) {

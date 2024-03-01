@@ -6,6 +6,7 @@
     "Fira Mono", "Droid Sans Mono", "Courier New", monospace;
 
   --main-color: rgb(90, 54, 6);
+  --secondary-color: rgb(227, 198, 138);
   --main-background-color: white;
   --header-background-color: rgb(255, 251, 188);
   --secondary-background-color: rgb(251, 253, 230);
@@ -50,6 +51,7 @@
 @media (prefers-color-scheme: dark) {
   :root {
     --main-color: rgb(142, 86, 14);
+    --secondary-color: rgb(227, 198, 138);
     --main-background-color: rgb(186, 182, 161);
     --header-background-color: rgb(197, 173, 136);
     --secondary-background-color: rgb(255, 235, 197);

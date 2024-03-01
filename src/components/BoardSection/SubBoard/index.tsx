@@ -2,7 +2,6 @@ import React, { useContext } from "react";
 import { MdLibraryAdd } from "react-icons/md";
 import { BoardContext } from "@/pages/Home/hooks/useBoardContext";
 import { columnNamesArr } from "@/config/system/columnNames";
-import { TaskType } from "@/config/system/types/sampleBoard";
 import Task from "@/components/Task";
 import style from "./style.module.css";
 
@@ -13,14 +12,12 @@ type SubBoardType = {
 
 export default function SubBoard({ columnId, columnName }: SubBoardType) {
   const { board } = useContext(BoardContext);
-  console.log("from subBoard", board, board[columnNamesArr[columnId].title]);
   return (
     <div className={style[columnNamesArr[columnId].title]}>
       <div className={style.title}>{columnNamesArr[columnId].display}</div>
       <div className={style.description}>
         {board[columnNamesArr[columnId].title].map((task, i, arr) => {
-          // console.log(task, i);
-          if (!task?._id.toString()) return <></>;
+          if (!task?._id?.toString()) return <></>;
           return (
             <React.Fragment key={task?._id.toString()}>
               <Task
