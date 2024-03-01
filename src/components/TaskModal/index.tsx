@@ -29,8 +29,6 @@ export default function TaskModal({ setIsModalActive }: TaskModalType) {
   const params = useParams();
   const searchParams = useSearchParams();
 
-  console.log(params, searchParams);
-
   const taskFunction = async (
     values: FormType,
     errors: FormikErrors<FormType>

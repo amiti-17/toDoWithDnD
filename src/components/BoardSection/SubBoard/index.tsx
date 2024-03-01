@@ -6,6 +6,7 @@ import { BoardContext } from "@/pages/Home/hooks/useBoardContext";
 import { columnNamesArr } from "@/config/system/columnNames";
 import Task from "@/components/Task";
 import style from "./style.module.css";
+import { Droppable } from "@hello-pangea/dnd";
 
 type SubBoardType = {
   columnId: number;
@@ -18,22 +19,31 @@ export default function SubBoard({ columnId, columnName }: SubBoardType) {
   return (
     <div className={style[columnNamesArr[columnId].title]}>
       <div className={style.title}>{columnNamesArr[columnId].display}</div>
-      <div className={style.description}>
-        {board[columnNamesArr[columnId].title].map((task, i, arr) => {
-          if (!task?._id?.toString()) return <></>;
-          return (
-            <React.Fragment key={task?._id.toString()}>
-              <Task
-                columnId={columnId}
-                task={task}
-                taskIndex={i}
-                key={task?._id.toString()}
-              />
-              {arr.length - 1 !== i && <hr className={style.hr} />}
-            </React.Fragment>
-          );
-        })}
-      </div>
+      <Droppable droppableId={String(columnId)}>
+        {(provided) => (
+          <div
+            className={style.description}
+            ref={provided.innerRef} // TODO: check if ref will work...
+            {...provided.droppableProps}
+          >
+            {board[columnNamesArr[columnId].title].map((task, i, arr) => {
+              if (!task?._id?.toString()) return <></>;
+              return (
+                <React.Fragment key={task?._id.toString()}>
+                  <Task
+                    columnId={columnId}
+                    task={task}
+                    taskIndex={i}
+                    key={task?._id.toString()}
+                  />
+                  {arr.length - 1 !== i && <hr className={style.hr} />}
+                </React.Fragment>
+              );
+            })}
+            {provided.placeholder}
+          </div>
+        )}
+      </Droppable>
       {!columnId && (
         <div className={style.taskCommand}>
           <Link
