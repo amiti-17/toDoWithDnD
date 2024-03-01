@@ -91,12 +91,14 @@ export default function TaskManagement({
     <div className={style.managementWrapper}>
       {isModalActive && <CreateTaskModal setIsModalActive={setIsModalActive} />}
       <FaLongArrowAltLeft
-        className={columnId === 0 ? style.disabled : ""}
+        className={`${style.svg} ${columnId === 0 ? style.disabled : ""}`}
         title="move left"
         onClick={moveLeft}
       />
       <FaLongArrowAltRight
-        className={columnId === amountOfColumns - 1 ? style.disabled : ""}
+        className={`${style.svg} ${
+          columnId === amountOfColumns - 1 ? style.disabled : ""
+        }`}
         title="move right"
         onClick={moveRight}
       />
@@ -105,12 +107,14 @@ export default function TaskManagement({
         href={`/boards/${params?.id}/task/edit/${taskId}?columnId=${columnId}&title=${currentTask.title}&description=${currentTask.description}`}
         scroll={false}
         shallow={true}
+        className={style.link}
       >
-        <MdEditSquare title="edit this task" />
+        <MdEditSquare title="edit this task" className={style.svg} />
       </Link>
 
       <HiArchiveBoxXMark
         title="delete this task"
+        className={style.svg}
         onClick={deleteWithChangeState}
       />
     </div>

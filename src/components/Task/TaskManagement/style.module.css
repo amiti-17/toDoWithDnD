@@ -1,7 +1,8 @@
-.managementWrapper > * {
+.svg {
   width: 22px;
   height: auto;
   cursor: pointer;
+  text-align: center;
 }
 
 .managementWrapper {
@@ -13,4 +14,11 @@
 
 .disabled {
   cursor: not-allowed;
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  width: 22px;
+  height: auto;
 }

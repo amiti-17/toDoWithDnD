@@ -31,17 +31,20 @@ export default function TaskModal({ setIsModalActive }: TaskModalType) {
 
   console.log(params, searchParams);
 
-  const createTask = async (
+  const taskFunction = async (
     values: FormType,
     errors: FormikErrors<FormType>
   ) => {
-    console.log(values, errors);
     if (!errors.title && !errors.description) {
       const newBoard: BoardType = {
         ...board,
       };
       const columnId = Number(searchParams?.get("columnId"));
-      if (params?.taskParams[0] === "edit" && columnId && newBoard) {
+      if (
+        params?.taskParams[0] === "edit" &&
+        searchParams?.get("columnId") &&
+        newBoard
+      ) {
         newBoard[columnNamesArr[columnId].title] = newBoard[
           columnNamesArr[columnId].title
         ].map((el) => {
@@ -87,7 +90,7 @@ export default function TaskModal({ setIsModalActive }: TaskModalType) {
             return errors;
           }}
           onSubmit={async (values, { setSubmitting }) => {
-            await createTask(values, {});
+            await taskFunction(values, {});
             setSubmitting(false);
           }}
         >
@@ -100,7 +103,7 @@ export default function TaskModal({ setIsModalActive }: TaskModalType) {
             handleSubmit,
             isSubmitting,
           }) => (
-            <form onSubmit={handleSubmit} className={style.createTaskForm}>
+            <form onSubmit={handleSubmit} className={style.taskFunctionForm}>
               <div className={style.inputWrapper}>
                 <input
                   className={style.input}
@@ -133,7 +136,7 @@ export default function TaskModal({ setIsModalActive }: TaskModalType) {
                 type="submit"
                 disabled={isSubmitting}
                 className={style.submit}
-                onClick={async () => await createTask(values, errors)}
+                onClick={async () => await taskFunction(values, errors)}
               >
                 {params?.taskParams[0] === "edit" ? "Update" : "Create"}
               </button>

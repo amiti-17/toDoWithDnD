@@ -1,5 +1,7 @@
 import React, { useContext } from "react";
 import { MdLibraryAdd } from "react-icons/md";
+import Link from "next/link";
+import { useParams } from "next/navigation";
 import { BoardContext } from "@/pages/Home/hooks/useBoardContext";
 import { columnNamesArr } from "@/config/system/columnNames";
 import Task from "@/components/Task";
@@ -12,6 +14,7 @@ type SubBoardType = {
 
 export default function SubBoard({ columnId, columnName }: SubBoardType) {
   const { board } = useContext(BoardContext);
+  const params = useParams();
   return (
     <div className={style[columnNamesArr[columnId].title]}>
       <div className={style.title}>{columnNamesArr[columnId].display}</div>
@@ -33,7 +36,12 @@ export default function SubBoard({ columnId, columnName }: SubBoardType) {
       </div>
       {!columnId && (
         <div className={style.taskCommand}>
-          <MdLibraryAdd title="add new task" />
+          <Link
+            href={`/boards/${params?.id}/task/create`}
+            className={style.link}
+          >
+            <MdLibraryAdd title="add new task" className={style.svg} />
+          </Link>
         </div>
       )}
     </div>
