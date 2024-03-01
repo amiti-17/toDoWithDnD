@@ -1,8 +1,8 @@
 import { Draggable } from "@hello-pangea/dnd";
-import { TaskType } from "@/config/system/types/sampleBoard";
 import TaskTitle from "./TaskTitle";
 import TaskDescription from "./TaskDescription";
 import TaskManagement from "./TaskManagement";
+import { TaskType } from "@/config/system/types/sampleBoard";
 import style from "./style.module.css";
 
 type TaskComponentType = {

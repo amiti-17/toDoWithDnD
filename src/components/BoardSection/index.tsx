@@ -1,11 +1,10 @@
 import { useContext } from "react";
-import { DragDropContext } from "@hello-pangea/dnd";
+import { DragDropContext, OnDragEndResponder } from "@hello-pangea/dnd";
 import SubBoard from "./SubBoard";
-import style from "./style.module.css";
 import { BoardType } from "@/config/system/types/sampleBoard";
 import { columnNamesArr } from "@/config/system/columnNames";
 import { BoardContext } from "@/pages/Home/hooks/useBoardContext";
-import { OnDragEndResponder } from "@hello-pangea/dnd";
+import style from "./style.module.css";
 
 type BoardsSectionType = {
   board: BoardType;
@@ -17,20 +16,21 @@ export default function BoardsSection({ isDeleted }: BoardsSectionType) {
   if (isDeleted) {
     return <div>This board was deleted</div>;
   }
-  const template = {
-    combine: null,
-    destination: { droppableId: "1", index: 0 },
-    draggableId: "65e1e99676a0bb0f9c9a9ea5",
-    mode: "FLUID",
-    reason: "DROP",
-    source: { index: 0, droppableId: "2" },
-    type: "DEFAULT",
-  };
+  // const template = { // how OnDragEndResponder props looks like
+  //   combine: null,
+  //   destination: { droppableId: "1", index: 0 },
+  //   draggableId: "65e1e99676a0bb0f9c9a9ea5",
+  //   mode: "FLUID",
+  //   reason: "DROP",
+  //   source: { index: 0, droppableId: "2" },
+  //   type: "DEFAULT",
+  // };
+
   const onDragEnd: OnDragEndResponder = (result) => {
     const {
       destination,
       source,
-      draggableId, // id of task
+      draggableId, // id of dragging task
     } = result;
     console.log(result);
     if (!destination) {

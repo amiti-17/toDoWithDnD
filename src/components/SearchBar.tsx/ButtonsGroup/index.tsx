@@ -14,8 +14,6 @@ export default function ButtonsGroup({
   disabled,
   handleSubmit,
 }: ButtonsGroupType) {
-  // console.log(disabled);
-
   const handleFormSubmit = () => {
     handleSubmit();
   };
@@ -27,7 +25,6 @@ export default function ButtonsGroup({
         className={`${styleFromElements} ${style.submitButton}`}
         disabled={disabled}
         onClick={() => {
-          // console.log("handleSubmit");
           handleFormSubmit();
         }}
       >

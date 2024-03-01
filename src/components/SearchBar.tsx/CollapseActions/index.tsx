@@ -1,9 +1,9 @@
+import { MdCreateNewFolder, MdFolderDelete } from "react-icons/md";
 import { useCollapse } from "react-collapsed";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { MdCreateNewFolder, MdFolderDelete } from "react-icons/md";
-import style from "./style.module.css";
 import dbAPI from "@/dbAPI";
+import style from "./style.module.css";
 
 type CollapseActionsType = {
   isOpened: boolean;
@@ -36,10 +36,6 @@ export default function CollapseActions({
       setIsDeleted(true);
     }
   }
-
-  // useEffect(() => {
-  //   (async () => {})();
-  // }, []);
 
   return (
     <div {...getCollapseProps()}>

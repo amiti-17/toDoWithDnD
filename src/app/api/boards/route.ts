@@ -1,5 +1,5 @@
 import { Board } from "@/mongoDB/models/boardsAndTasks";
-import connectToMongoDb from "@/mongoDB";
+import connectToMongoDb from "@/mongoDB/connect";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest) {

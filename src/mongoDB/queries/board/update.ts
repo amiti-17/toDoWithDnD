@@ -1,5 +1,4 @@
 import { BoardType } from "@/config/system/types/sampleBoard";
-import mongoose from "mongoose";
 
 export default function updateOneById(
   id: string,

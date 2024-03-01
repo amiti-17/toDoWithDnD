@@ -1,4 +1,4 @@
-import { BoardType, defaultBoard } from "@/config/system/types/sampleBoard";
+import { BoardType } from "@/config/system/types/sampleBoard";
 
 export default async function getInitial(): Promise<BoardType | undefined> {
   try {

@@ -31,8 +31,3 @@ export const columnNamesArr: ColumnNamesType = [
     display: "Done",
   },
 ];
-
-// export const firstAndLastColumnNames: NamesType = {
-//   first: "toDo",
-//   last: "done",
-// };

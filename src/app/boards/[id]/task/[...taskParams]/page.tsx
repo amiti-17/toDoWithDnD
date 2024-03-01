@@ -5,12 +5,5 @@ export default function Page({
 }: {
   params: { taskParams: string[]; id: string };
 }) {
-  console.log(params);
-  return (
-    <TaskPage
-      boardId={params.id}
-      type={params.taskParams[0]}
-      taskId={params.taskParams[1]}
-    />
-  );
+  return <TaskPage boardId={params.id} />;
 }

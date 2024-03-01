@@ -1,12 +1,12 @@
-import React, { useContext } from "react";
-import { MdLibraryAdd } from "react-icons/md";
 import Link from "next/link";
+import React, { useContext } from "react";
 import { useParams } from "next/navigation";
+import { MdLibraryAdd } from "react-icons/md";
+import { Droppable } from "@hello-pangea/dnd";
 import { BoardContext } from "@/pages/Home/hooks/useBoardContext";
 import { columnNamesArr } from "@/config/system/columnNames";
 import Task from "@/components/Task";
 import style from "./style.module.css";
-import { Droppable } from "@hello-pangea/dnd";
 
 type SubBoardType = {
   columnId: number;
@@ -23,7 +23,7 @@ export default function SubBoard({ columnId, columnName }: SubBoardType) {
         {(provided) => (
           <div
             className={style.description}
-            ref={provided.innerRef} // TODO: check if ref will work...
+            ref={provided.innerRef}
             {...provided.droppableProps}
           >
             {board[columnNamesArr[columnId].title].map((task, i, arr) => {

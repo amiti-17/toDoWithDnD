@@ -12,12 +12,6 @@ const dbAPI = {
   find: findOne,
   update: updateOneById,
   delete: deleteOneById,
-  // task: {
-  // create,
-  // find: findOne,
-  // update: updateOneById,
-  // delete: deleteOneById,
-  // },
 };
 
 export default dbAPI;

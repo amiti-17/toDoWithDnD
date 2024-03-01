@@ -2,17 +2,15 @@
 
 import { useContext, useState } from "react";
 import { useRouter } from "next/navigation";
-import style from "./style.module.css";
-import CollapseActions from "./CollapseActions";
-import ButtonsGroup from "./ButtonsGroup";
 import mongoose from "mongoose";
 import { Formik, FormikErrors } from "formik";
 import dbAPI from "@/dbAPI";
+import ButtonsGroup from "./ButtonsGroup";
+import CollapseActions from "./CollapseActions";
 import { BoardContext } from "@/pages/Home/hooks/useBoardContext";
+import style from "./style.module.css";
 
 type SearchBarType = {
-  // currentId: string;
-  // setBoard: React.Dispatch<React.SetStateAction<BoardType>>;
   setIsDeleted: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
@@ -40,16 +38,6 @@ export default function SearchBar({ setIsDeleted }: SearchBarType) {
 
   return (
     <header className={style.formWrapper}>
-      {/* <form onSubmit={onSubmit} className={style.form}>
-        <input
-          className={`${style.input} ${style.formElements}`}
-          placeholder="Search board by id..."
-        ></input>
-        <ButtonsGroup
-          setCollapseIsOpen={setCollapseIsOpen}
-          styleFromElements={style.formElements}
-        />
-      </form> */}
       <Formik
         initialValues={{ idField: "" }}
         validate={(values: { idField: string }) => {

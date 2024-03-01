@@ -10,8 +10,6 @@ import style from "./style.module.css";
 import dbAPI from "@/dbAPI";
 
 type TaskPageType = {
-  type: string;
-  taskId: string;
   boardId: string;
 };
 export default function TaskPage({ boardId }: TaskPageType) {

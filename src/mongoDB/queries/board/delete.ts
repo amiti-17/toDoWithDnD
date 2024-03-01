@@ -1,11 +1,10 @@
-import { BoardType, defaultBoard } from "@/config/system/types/sampleBoard";
-import mongoose from "mongoose";
+import { BoardType } from "@/config/system/types/sampleBoard";
 
 export default async function deleteOneById(id: string): Promise<BoardType> {
   try {
     const data = await fetch(`/api/boards?id=${id}`, {
       method: "DELETE",
-      cache: 'no-cache',
+      cache: "no-cache",
     });
     if (data.status === 405) {
       throw new Error("Operation not allowed");

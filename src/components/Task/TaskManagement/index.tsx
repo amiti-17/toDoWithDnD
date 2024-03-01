@@ -1,21 +1,14 @@
 import Link from "next/link";
+import { useParams } from "next/navigation";
 import { useContext, useState } from "react";
 import { MdEditSquare } from "react-icons/md";
 import { HiArchiveBoxXMark } from "react-icons/hi2";
 import { FaLongArrowAltLeft, FaLongArrowAltRight } from "react-icons/fa";
-import style from "./style.module.css";
 import { BoardContext } from "@/pages/Home/hooks/useBoardContext";
 import { columnNamesArr } from "@/config/system/columnNames";
 import { BoardType } from "@/config/system/types/sampleBoard";
 import CreateTaskModal from "@/components/TaskModal";
-import {
-  useRouter,
-  useParams,
-  usePathname,
-  useSearchParams,
-  useSelectedLayoutSegment,
-  useSelectedLayoutSegments,
-} from "next/navigation";
+import style from "./style.module.css";
 
 type TaskManagementType = {
   columnId: number;
@@ -33,21 +26,7 @@ export default function TaskManagement({
   const amountOfColumns = columnNamesArr.length;
   const columnTitle = columnNamesArr[columnId].title;
   const currentTask = board[columnTitle][taskIndex];
-  const router = useRouter();
   const params = useParams();
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
-  const selectedLayoutSegment = useSelectedLayoutSegment();
-  const selectedLayoutSegments = useSelectedLayoutSegments();
-  console.log({
-    pathname,
-    params,
-    searchParams,
-    selectedLayoutSegment,
-    selectedLayoutSegments,
-  });
-
-  // is it good approach to write function like this?
 
   function deleteTask(): BoardType {
     const newBoard = {
@@ -103,7 +82,6 @@ export default function TaskManagement({
         onClick={moveRight}
       />
       <Link
-        // href={""}
         href={`/boards/${params?.id}/task/edit/${taskId}?columnId=${columnId}&title=${currentTask.title}&description=${currentTask.description}`}
         scroll={false}
         shallow={true}
