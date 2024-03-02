@@ -5,7 +5,7 @@ import { Formik, FormikErrors } from "formik";
 import { useParams, useSearchParams } from "next/navigation";
 import Overlay from "@/components/Overlay";
 import { columnNamesArr } from "@/config/system/columnNames";
-import { BoardContext } from "@/pages/Home/hooks/useBoardContext";
+import { BoardContext } from "@/myPages/Home/hooks/useBoardContext";
 import { BoardType, TaskType } from "@/config/system/types/sampleBoard";
 import style from "./style.module.css";
 

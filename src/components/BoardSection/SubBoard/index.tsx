@@ -3,7 +3,7 @@ import React, { useContext } from "react";
 import { useParams } from "next/navigation";
 import { MdLibraryAdd } from "react-icons/md";
 import { Droppable } from "@hello-pangea/dnd";
-import { BoardContext } from "@/pages/Home/hooks/useBoardContext";
+import { BoardContext } from "@/myPages/Home/hooks/useBoardContext";
 import { columnNamesArr } from "@/config/system/columnNames";
 import Task from "@/components/Task";
 import style from "./style.module.css";

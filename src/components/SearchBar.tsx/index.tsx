@@ -7,7 +7,7 @@ import { Formik, FormikErrors } from "formik";
 import dbAPI from "@/dbAPI";
 import ButtonsGroup from "./ButtonsGroup";
 import CollapseActions from "./CollapseActions";
-import { BoardContext } from "@/pages/Home/hooks/useBoardContext";
+import { BoardContext } from "@/myPages/Home/hooks/useBoardContext";
 import style from "./style.module.css";
 
 type SearchBarType = {

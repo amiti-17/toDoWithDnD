@@ -4,7 +4,7 @@ import { useContext, useState } from "react";
 import { MdEditSquare } from "react-icons/md";
 import { HiArchiveBoxXMark } from "react-icons/hi2";
 import { FaLongArrowAltLeft, FaLongArrowAltRight } from "react-icons/fa";
-import { BoardContext } from "@/pages/Home/hooks/useBoardContext";
+import { BoardContext } from "@/myPages/Home/hooks/useBoardContext";
 import { columnNamesArr } from "@/config/system/columnNames";
 import { BoardType } from "@/config/system/types/sampleBoard";
 import CreateTaskModal from "@/components/TaskModal";

@@ -1,4 +1,4 @@
-import TaskPage from "@/pages/Task";
+import TaskPage from "@/myPages/Task";
 
 export default function Page({
   params,

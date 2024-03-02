@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { DragDropContext, OnDragEndResponder } from "@hello-pangea/dnd";
 import SubBoard from "./SubBoard";
 import { columnNamesArr } from "@/config/system/columnNames";
-import { BoardContext } from "@/pages/Home/hooks/useBoardContext";
+import { BoardContext } from "@/myPages/Home/hooks/useBoardContext";
 import style from "./style.module.css";
 
 type BoardsSectionType = {

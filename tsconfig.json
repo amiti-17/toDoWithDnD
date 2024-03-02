@@ -21,6 +21,14 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/pages/Home", "src/components/BoardSection", "src/components/Task"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "src/myPages/Home",
+    "src/components/BoardSection",
+    "src/components/Task"
+  ],
   "exclude": ["node_modules"]
 }
