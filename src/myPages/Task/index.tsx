@@ -9,10 +9,10 @@ import { BoardContext } from "../Home/hooks/useBoardContext";
 import style from "./style.module.css";
 import dbAPI from "@/dbAPI";
 
-type TaskPageType = {
+type TaskPageProps = {
   boardId: string;
 };
-export default function TaskPage({ boardId }: TaskPageType) {
+export default function TaskPage({ boardId }: TaskPageProps) {
   const router = useRouter();
   const [board, setBoard] = useState<BoardType>(sampleBoard);
   const [isBoardShouldUpdate, setIsBoardShouldUpdate] = useState(false);

@@ -2,7 +2,7 @@ import { SetStateAction } from "react";
 import { TbLayoutBottombarCollapseFilled } from "react-icons/tb";
 import style from "./style.module.css";
 
-type ButtonsGroupType = {
+type ButtonsGroupProps = {
   setCollapseIsOpen: React.Dispatch<SetStateAction<boolean>>;
   styleFromElements: string;
   disabled: boolean;
@@ -13,7 +13,7 @@ export default function ButtonsGroup({
   styleFromElements,
   disabled,
   handleSubmit,
-}: ButtonsGroupType) {
+}: ButtonsGroupProps) {
   const handleFormSubmit = () => {
     handleSubmit();
   };

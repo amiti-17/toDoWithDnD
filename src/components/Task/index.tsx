@@ -5,12 +5,16 @@ import TaskManagement from "./TaskManagement";
 import { TaskType } from "@/config/system/types/sampleBoard";
 import style from "./style.module.css";
 
-type TaskComponentType = {
+type TaskComponentProps = {
   task: TaskType;
   columnId: number;
   taskIndex: number;
 };
-export default function Task({ task, columnId, taskIndex }: TaskComponentType) {
+export default function Task({
+  task,
+  columnId,
+  taskIndex,
+}: TaskComponentProps) {
   return (
     <Draggable draggableId={task._id.toString()} index={taskIndex}>
       {(provided) => {

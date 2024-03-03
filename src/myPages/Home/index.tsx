@@ -13,7 +13,6 @@ import SearchBar from "@/components/SearchBar.tsx";
 import { BoardContext } from "./hooks/useBoardContext";
 import style from "./style.module.css";
 import dbAPI from "@/dbAPI";
-import Loadable from "next/dist/shared/lib/loadable.shared-runtime";
 import LoadingCircle from "@/components/LoadingCircle";
 
 export default function Home({ id }: { id: string | undefined }) {
@@ -41,6 +40,7 @@ export default function Home({ id }: { id: string | undefined }) {
   }, [isBoardShouldUpdate]);
 
   useEffect(() => {
+    setLoading(true);
     (async () => {
       if (id === undefined) {
         const myProbablyBoard = await dbAPI.getInitial();
@@ -63,7 +63,8 @@ export default function Home({ id }: { id: string | undefined }) {
         }
       }
     })();
-  }, [id]); // remove board
+    setLoading(false);
+  }, [id]);
 
   return (
     <BoardContext.Provider

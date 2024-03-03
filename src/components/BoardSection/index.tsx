@@ -5,12 +5,15 @@ import { columnInit } from "@/config/system/columnNames";
 import { BoardContext } from "@/myPages/Home/hooks/useBoardContext";
 import style from "./style.module.css";
 
-type BoardsSectionType = {
+type BoardsSectionProps = {
   isDeleted: boolean;
   error: string;
 };
 
-export default function BoardsSection({ isDeleted, error }: BoardsSectionType) {
+export default function BoardsSection({
+  isDeleted,
+  error,
+}: BoardsSectionProps) {
   const { board, setBoard, setIsBoardShouldUpdate } = useContext(BoardContext);
   if (isDeleted) {
     return <div>This board was deleted</div>;

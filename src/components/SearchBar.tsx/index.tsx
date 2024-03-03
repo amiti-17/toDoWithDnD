@@ -10,11 +10,11 @@ import CollapseActions from "./CollapseActions";
 import { BoardContext } from "@/myPages/Home/hooks/useBoardContext";
 import style from "./style.module.css";
 
-type SearchBarType = {
+type SearchBarProps = {
   setIsDeleted: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-export default function SearchBar({ setIsDeleted }: SearchBarType) {
+export default function SearchBar({ setIsDeleted }: SearchBarProps) {
   const router = useRouter();
   const { board } = useContext(BoardContext);
   console.log(board);
@@ -43,7 +43,7 @@ export default function SearchBar({ setIsDeleted }: SearchBarType) {
         validate={(values: { idField: string }) => {
           const errors: { [index: string]: string } = {};
           try {
-            errors.idField = mongoose.Types.ObjectId.isValid(values.idField)
+            errors.idField = mongoose.Propss.ObjectId.isValid(values.idField)
               ? ""
               : "Invalid input, should be 12 byte string, or 24 character hex string";
           } catch (error) {

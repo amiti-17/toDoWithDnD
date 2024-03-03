@@ -5,7 +5,7 @@ import { useState } from "react";
 import dbAPI from "@/dbAPI";
 import style from "./style.module.css";
 
-type CollapseActionsType = {
+type CollapseActionsProps = {
   isOpened: boolean;
   currentId: string;
   setIsDeleted: React.Dispatch<React.SetStateAction<boolean>>;
@@ -14,7 +14,7 @@ export default function CollapseActions({
   currentId,
   isOpened,
   setIsDeleted,
-}: CollapseActionsType) {
+}: CollapseActionsProps) {
   const { getCollapseProps } = useCollapse({ isExpanded: isOpened });
   const [isCreateButtonDisabled, setIsCreateButtonDisabled] = useState(false);
   const [isDeleteButtonDisabled, setIsDeleteButtonDisabled] = useState(false);

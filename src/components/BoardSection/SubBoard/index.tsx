@@ -8,12 +8,12 @@ import { columnInit } from "@/config/system/columnNames";
 import Task from "@/components/Task";
 import style from "./style.module.css";
 
-type SubBoardType = {
+type SubBoardProps = {
   columnId: number;
   columnName: string;
 };
 
-export default function SubBoard({ columnId, columnName }: SubBoardType) {
+export default function SubBoard({ columnId, columnName }: SubBoardProps) {
   const { board } = useContext(BoardContext);
   const params = useParams();
   return (

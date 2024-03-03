@@ -9,7 +9,7 @@ import { BoardContext } from "@/myPages/Home/hooks/useBoardContext";
 import { BoardType, TaskType } from "@/config/system/types/sampleBoard";
 import style from "./style.module.css";
 
-type TaskModalType = {
+type TaskModalProps = {
   setIsModalActive?: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
@@ -23,7 +23,7 @@ const baseFormObj: FormType = {
   description: "",
 };
 
-export default function TaskModal({ setIsModalActive }: TaskModalType) {
+export default function TaskModal({ setIsModalActive }: TaskModalProps) {
   const { board, setBoard, setIsBoardShouldUpdate } = useContext(BoardContext);
   const overlay = useRef(null);
   const params = useParams();
