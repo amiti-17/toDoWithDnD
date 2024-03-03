@@ -8,7 +8,7 @@ const taskSchema = new Schema(
   {
     timestamps: true,
   }
-)
+);
 
 const boardSchema = new Schema(
   {
@@ -19,7 +19,8 @@ const boardSchema = new Schema(
   {
     timestamps: true,
   }
-)
+);
 
-export const Task =  mongoose.models.Task || mongoose.model("Task", taskSchema);
-export const Board =  mongoose.models.Board || mongoose.model("Board", boardSchema);
+// export const Task =  mongoose.models.Task || mongoose.model("Task", taskSchema); //deprecated
+export const Board =
+  mongoose.models.Board || mongoose.model("Board", boardSchema);
