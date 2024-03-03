@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { DragDropContext, OnDragEndResponder } from "@hello-pangea/dnd";
 import SubBoard from "./SubBoard";
-import { columnNamesArr } from "@/config/system/columnNames";
+import { columnInit } from "@/config/system/columnNames";
 import { BoardContext } from "@/myPages/Home/hooks/useBoardContext";
 import style from "./style.module.css";
 
@@ -21,15 +21,6 @@ export default function BoardsSection({ isDeleted, error }: BoardsSectionType) {
   if (board?._id === undefined) {
     return <div>{"This board doesn't exists"}</div>;
   }
-  // const template = { // how OnDragEndResponder props looks like
-  //   combine: null,
-  //   destination: { droppableId: "1", index: 0 },
-  //   draggableId: "65e1e99676a0bb0f9c9a9ea5",
-  //   mode: "FLUID",
-  //   reason: "DROP",
-  //   source: { index: 0, droppableId: "2" },
-  //   type: "DEFAULT",
-  // };
 
   const onDragEnd: OnDragEndResponder = (result) => {
     const {
@@ -37,7 +28,7 @@ export default function BoardsSection({ isDeleted, error }: BoardsSectionType) {
       source,
       draggableId, // id of dragging task
     } = result;
-    console.log(result);
+
     if (!destination) {
       return;
     }
@@ -47,26 +38,26 @@ export default function BoardsSection({ isDeleted, error }: BoardsSectionType) {
     ) {
       return;
     }
+
     const newBoard = {
       ...board,
     };
-    let currentTask =
-      newBoard[columnNamesArr[Number(source.droppableId)].title][source.index];
-    newBoard[columnNamesArr[Number(source.droppableId)].title] = newBoard[
-      columnNamesArr[Number(source.droppableId)].title
-    ].filter((task) => task._id.toString() !== draggableId);
-    newBoard[columnNamesArr[Number(destination.droppableId)].title].splice(
-      destination.index,
-      0,
-      currentTask
+    const sourceColumnIndex = columnInit[Number(source.droppableId)].title;
+    const destinationColumnIndex =
+      columnInit[Number(destination.droppableId)].title;
+    let currentTask = newBoard[sourceColumnIndex][source.index];
+
+    newBoard[sourceColumnIndex] = newBoard[sourceColumnIndex].filter(
+      (task) => task._id.toString() !== draggableId
     );
+    newBoard[destinationColumnIndex].splice(destination.index, 0, currentTask);
     setBoard(newBoard);
     setIsBoardShouldUpdate(true);
   };
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <div className={style.boardWrapper}>
-        {columnNamesArr.map((columnName, index) => {
+        {columnInit.map((columnName, index) => {
           return (
             <SubBoard
               columnId={index}

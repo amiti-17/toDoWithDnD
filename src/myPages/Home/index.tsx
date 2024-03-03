@@ -13,6 +13,8 @@ import SearchBar from "@/components/SearchBar.tsx";
 import { BoardContext } from "./hooks/useBoardContext";
 import style from "./style.module.css";
 import dbAPI from "@/dbAPI";
+import Loadable from "next/dist/shared/lib/loadable.shared-runtime";
+import LoadingCircle from "@/components/LoadingCircle";
 
 export default function Home({ id }: { id: string | undefined }) {
   const [board, setBoard] = useState<BoardType>(sampleBoard);
@@ -24,6 +26,7 @@ export default function Home({ id }: { id: string | undefined }) {
   const [isDeleted, setIsDeleted] = useState<boolean>(false);
 
   useEffect(() => {
+    setLoading(true);
     console.log("from home component", board);
     if (isBoardShouldUpdate) {
       (async () => {
@@ -34,6 +37,7 @@ export default function Home({ id }: { id: string | undefined }) {
       })();
       setIsBoardShouldUpdate(false);
     }
+    setLoading(false);
   }, [isBoardShouldUpdate]);
 
   useEffect(() => {
@@ -67,7 +71,8 @@ export default function Home({ id }: { id: string | undefined }) {
     >
       <div className={style.searchBarWrapper}>
         <SearchBar setIsDeleted={setIsDeleted} />
-        {<BoardsSection isDeleted={isDeleted} error={error} />}
+        {loading && <LoadingCircle />}
+        {!loading && <BoardsSection isDeleted={isDeleted} error={error} />}
       </div>
     </BoardContext.Provider>
   );

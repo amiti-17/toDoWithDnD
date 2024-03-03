@@ -4,7 +4,7 @@ import { useParams } from "next/navigation";
 import { MdLibraryAdd } from "react-icons/md";
 import { Droppable } from "@hello-pangea/dnd";
 import { BoardContext } from "@/myPages/Home/hooks/useBoardContext";
-import { columnNamesArr } from "@/config/system/columnNames";
+import { columnInit } from "@/config/system/columnNames";
 import Task from "@/components/Task";
 import style from "./style.module.css";
 
@@ -17,8 +17,8 @@ export default function SubBoard({ columnId, columnName }: SubBoardType) {
   const { board } = useContext(BoardContext);
   const params = useParams();
   return (
-    <div className={style[columnNamesArr[columnId].title]}>
-      <div className={style.title}>{columnNamesArr[columnId].display}</div>
+    <div className={style[columnInit[columnId].title]}>
+      <div className={style.title}>{columnInit[columnId].display}</div>
       <Droppable droppableId={String(columnId)}>
         {(provided) => (
           <div
@@ -26,7 +26,7 @@ export default function SubBoard({ columnId, columnName }: SubBoardType) {
             ref={provided.innerRef}
             {...provided.droppableProps}
           >
-            {board[columnNamesArr[columnId].title].map((task, i, arr) => {
+            {board[columnInit[columnId].title].map((task, i, arr) => {
               if (!task?._id?.toString()) return <></>;
               return (
                 <React.Fragment key={task?._id.toString()}>

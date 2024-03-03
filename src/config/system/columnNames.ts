@@ -1,23 +1,11 @@
-export type NamesType = {
-  [index: string]: string;
+type Title = "toDo" | "inProgress" | "done";
+type Display = "To do" | "In progress" | "Done";
+type Column = {
+  title: Title;
+  display: Display;
 };
 
-export type ColumnNamesType = [
-  {
-    title: "toDo";
-    display: "To do";
-  },
-  {
-    title: "inProgress";
-    display: "In progress";
-  },
-  {
-    title: "done";
-    display: "Done";
-  }
-];
-
-export const columnNamesArr: ColumnNamesType = [
+export const columnInit: Column[] = [
   {
     title: "toDo",
     display: "To do",

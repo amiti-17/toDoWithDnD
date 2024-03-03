@@ -5,7 +5,7 @@ import { MdEditSquare } from "react-icons/md";
 import { HiArchiveBoxXMark } from "react-icons/hi2";
 import { FaLongArrowAltLeft, FaLongArrowAltRight } from "react-icons/fa";
 import { BoardContext } from "@/myPages/Home/hooks/useBoardContext";
-import { columnNamesArr } from "@/config/system/columnNames";
+import { columnInit } from "@/config/system/columnNames";
 import { BoardType } from "@/config/system/types/sampleBoard";
 import CreateTaskModal from "@/components/TaskModal";
 import style from "./style.module.css";
@@ -23,8 +23,8 @@ export default function TaskManagement({
 }: TaskManagementType) {
   const { board, setBoard, setIsBoardShouldUpdate } = useContext(BoardContext);
   const [isModalActive, setIsModalActive] = useState<boolean>(false);
-  const amountOfColumns = columnNamesArr.length;
-  const columnTitle = columnNamesArr[columnId].title;
+  const amountOfColumns = columnInit.length;
+  const columnTitle = columnInit[columnId].title;
   const currentTask = board[columnTitle][taskIndex];
   const params = useParams();
 
@@ -49,7 +49,7 @@ export default function TaskManagement({
       return;
     } else {
       const newBoard = deleteTask();
-      newBoard[columnNamesArr[columnId + 1].title].push(currentTask);
+      newBoard[columnInit[columnId + 1].title].push(currentTask);
       setBoard(newBoard);
       setIsBoardShouldUpdate(true);
     }
@@ -60,7 +60,7 @@ export default function TaskManagement({
       return;
     } else {
       const newBoard = deleteTask();
-      newBoard[columnNamesArr[columnId - 1].title].push(currentTask);
+      newBoard[columnInit[columnId - 1].title].push(currentTask);
       setBoard(newBoard);
       setIsBoardShouldUpdate(true);
     }

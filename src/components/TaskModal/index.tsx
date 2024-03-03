@@ -4,7 +4,7 @@ import { useContext, useRef } from "react";
 import { Formik, FormikErrors } from "formik";
 import { useParams, useSearchParams } from "next/navigation";
 import Overlay from "@/components/Overlay";
-import { columnNamesArr } from "@/config/system/columnNames";
+import { columnInit } from "@/config/system/columnNames";
 import { BoardContext } from "@/myPages/Home/hooks/useBoardContext";
 import { BoardType, TaskType } from "@/config/system/types/sampleBoard";
 import style from "./style.module.css";
@@ -43,8 +43,8 @@ export default function TaskModal({ setIsModalActive }: TaskModalType) {
         searchParams?.get("columnId") &&
         newBoard
       ) {
-        newBoard[columnNamesArr[columnId].title] = newBoard[
-          columnNamesArr[columnId].title
+        newBoard[columnInit[columnId].title] = newBoard[
+          columnInit[columnId].title
         ].map((el) => {
           if (el._id.toString() === params.taskParams[1]) {
             return values as TaskType;
@@ -52,7 +52,7 @@ export default function TaskModal({ setIsModalActive }: TaskModalType) {
           return el;
         });
       } else {
-        board[columnNamesArr[0].title].push(values as TaskType);
+        board[columnInit[0].title].push(values as TaskType);
       }
 
       setBoard(newBoard);
