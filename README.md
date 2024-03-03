@@ -2,15 +2,21 @@
 
 - Cached data
 - Real user auth
-- Strore in db in array id of task instead the task…
+- Store in db in array id of task instead the task…
 - Add modal instead of new page
 - Think about useMemo, memo, use callback…
 - Add loaders…
 - When click on searchIndex input, display some existing \_ids
+- Create a list of existing boards…
+- Add background to draggable elements
 
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Where to try it
+
+You can view this project on [Netlify](https://todowithdnd.netlify.app/)
 
 ## Getting Started
+
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 First, run the development server:
 
