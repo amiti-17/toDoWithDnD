@@ -3,8 +3,6 @@
 }
 
 .formWrapper {
-  /* width: 90%;
-  margin: auto; */
   color: var(--main-color);
   display: flex;
   flex-flow: column;
@@ -55,4 +53,20 @@
   width: 100%;
   text-align: left;
   height: auto;
+}
+
+/* Mobile */
+@media (max-width: 700px) {
+  .formWrapper {
+    margin: 0 20px;
+  }
+
+  .form {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .inputWrapper {
+    width: 90%;
+  }
 }

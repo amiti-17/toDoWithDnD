@@ -16,3 +16,15 @@
   background-color: var(--secondary-background-color);
   border-radius: 20px;
 }
+
+@media (max-width: 768px) {
+  .boardWrapper > div {
+    width: 45%;
+  }
+}
+
+@media (max-width: 500px) {
+  .boardWrapper > div {
+    width: 85%;
+  }
+}
