@@ -15,7 +15,7 @@ import style from "./style.module.css";
 import dbAPI from "@/dbAPI";
 import LoadingCircle from "@/components/LoadingCircle";
 
-export default function Home({ id }: { id: string | undefined }) {
+const Home = ({ id }: { id: string | undefined }) => {
   const [board, setBoard] = useState<BoardType>(sampleBoard);
   const [error, setError] = useState<string>("");
   const [isBoardShouldUpdate, setIsBoardShouldUpdate] =
@@ -78,3 +78,5 @@ export default function Home({ id }: { id: string | undefined }) {
     </BoardContext.Provider>
   );
 }
+
+export default Home;

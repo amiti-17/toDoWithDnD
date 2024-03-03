@@ -43,7 +43,7 @@ export default function SearchBar({ setIsDeleted }: SearchBarProps) {
         validate={(values: { idField: string }) => {
           const errors: { [index: string]: string } = {};
           try {
-            errors.idField = mongoose.Propss.ObjectId.isValid(values.idField)
+            errors.idField = mongoose.Types.ObjectId.isValid(values.idField)
               ? ""
               : "Invalid input, should be 12 byte string, or 24 character hex string";
           } catch (error) {

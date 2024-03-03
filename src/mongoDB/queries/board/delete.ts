@@ -1,6 +1,6 @@
 import { BoardType } from "@/config/system/types/sampleBoard";
 
-export default async function deleteOneById(id: string): Promise<BoardType> {
+const deleteOneById = async (id: string): Promise<BoardType> => {
   try {
     const data = await fetch(`/api/boards?id=${id}`, {
       method: "DELETE",
@@ -19,4 +19,6 @@ export default async function deleteOneById(id: string): Promise<BoardType> {
     console.warn(errorMessage);
     throw error;
   }
-}
+};
+
+export default deleteOneById;

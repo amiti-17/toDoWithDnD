@@ -10,11 +10,7 @@ type TaskComponentProps = {
   columnId: number;
   taskIndex: number;
 };
-export default function Task({
-  task,
-  columnId,
-  taskIndex,
-}: TaskComponentProps) {
+const Task = ({ task, columnId, taskIndex }: TaskComponentProps) => {
   return (
     <Draggable draggableId={task._id.toString()} index={taskIndex}>
       {(provided) => {
@@ -37,4 +33,6 @@ export default function Task({
       }}
     </Draggable>
   ); // TODO: add some functions to task management...
-}
+};
+
+export default Task;

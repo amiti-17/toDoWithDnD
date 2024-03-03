@@ -8,12 +8,12 @@ type ButtonsGroupProps = {
   disabled: boolean;
   handleSubmit: () => void;
 };
-export default function ButtonsGroup({
+const ButtonsGroup = ({
   setCollapseIsOpen,
   styleFromElements,
   disabled,
   handleSubmit,
-}: ButtonsGroupProps) {
+}: ButtonsGroupProps) => {
   const handleFormSubmit = () => {
     handleSubmit();
   };
@@ -36,4 +36,6 @@ export default function ButtonsGroup({
       />
     </div>
   );
-}
+};
+
+export default ButtonsGroup;

@@ -12,7 +12,7 @@ import dbAPI from "@/dbAPI";
 type TaskPageProps = {
   boardId: string;
 };
-export default function TaskPage({ boardId }: TaskPageProps) {
+const TaskPage = ({ boardId }: TaskPageProps) => {
   const router = useRouter();
   const [board, setBoard] = useState<BoardType>(sampleBoard);
   const [isBoardShouldUpdate, setIsBoardShouldUpdate] = useState(false);
@@ -47,4 +47,6 @@ export default function TaskPage({ boardId }: TaskPageProps) {
       <TaskModal setIsModalActive={undefined}></TaskModal>
     </BoardContext.Provider>
   );
-}
+};
+
+export default TaskPage;

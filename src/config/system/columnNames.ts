@@ -1,4 +1,4 @@
-type Title = "toDo" | "inProgress" | "done";
+export type Title = "toDo" | "inProgress" | "done";
 type Display = "To do" | "In progress" | "Done";
 type Column = {
   title: Title;

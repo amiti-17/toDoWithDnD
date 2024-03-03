@@ -10,10 +10,7 @@ type BoardsSectionProps = {
   error: string;
 };
 
-export default function BoardsSection({
-  isDeleted,
-  error,
-}: BoardsSectionProps) {
+const BoardsSection = ({ isDeleted, error }: BoardsSectionProps) => {
   const { board, setBoard, setIsBoardShouldUpdate } = useContext(BoardContext);
   if (isDeleted) {
     return <div>This board was deleted</div>;
@@ -72,4 +69,6 @@ export default function BoardsSection({
       </div>
     </DragDropContext>
   ); // TODO: add default view, when no boards exists...
-}
+};
+
+export default BoardsSection;

@@ -1,8 +1,8 @@
 import { BoardErrorType, BoardType } from "@/config/system/types/sampleBoard";
 
-export default async function getInitial(): Promise<
+const getInitial = async (): Promise<
   BoardType | BoardErrorType | undefined
-> {
+> =>{
   try {
     const data = await fetch("/api/boards/getInitial", {
       method: "GET",
@@ -14,3 +14,5 @@ export default async function getInitial(): Promise<
     return undefined;
   }
 }
+
+export default getInitial;

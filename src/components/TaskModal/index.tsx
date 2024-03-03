@@ -23,7 +23,7 @@ const baseFormObj: FormType = {
   description: "",
 };
 
-export default function TaskModal({ setIsModalActive }: TaskModalProps) {
+const TaskModal = ({ setIsModalActive }: TaskModalProps) => {
   const { board, setBoard, setIsBoardShouldUpdate } = useContext(BoardContext);
   const overlay = useRef(null);
   const params = useParams();
@@ -144,4 +144,6 @@ export default function TaskModal({ setIsModalActive }: TaskModalProps) {
       </div>
     </Overlay>
   );
-}
+};
+
+export default TaskModal;

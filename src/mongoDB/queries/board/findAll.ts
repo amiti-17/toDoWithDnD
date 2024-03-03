@@ -1,6 +1,6 @@
 import { BoardType, defaultBoard } from "@/config/system/types/sampleBoard";
 
-export default async function findAll(): Promise<BoardType[]> {
+const findAll = async (): Promise<BoardType[]> => {
   try {
     const data = await fetch("/api/boards", {
       method: "GET",
@@ -11,4 +11,6 @@ export default async function findAll(): Promise<BoardType[]> {
     console.warn("We couldn't fetch initial board in getInitial", error);
     return [defaultBoard];
   }
-}
+};
+
+export default findAll;

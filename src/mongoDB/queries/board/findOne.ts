@@ -1,7 +1,7 @@
 import { BoardType, defaultBoard } from "@/config/system/types/sampleBoard";
 import mongoose from "mongoose";
 
-export default async function findOne(id: string): Promise<BoardType> {
+const findOne = async (id: string): Promise<BoardType> => {
   try {
     const data = await fetch(`/api/boards/${id}`, {
       method: "GET",
@@ -14,4 +14,6 @@ export default async function findOne(id: string): Promise<BoardType> {
     console.warn("We couldn't fetch initial board in findOne", error);
     throw error;
   }
-}
+};
+
+export default findOne;

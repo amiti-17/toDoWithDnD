@@ -1,9 +1,9 @@
 import { BoardType } from "@/config/system/types/sampleBoard";
 
-export default function updateOneById(
+const updateOneById = (
   id: string,
   updatedBoard: BoardType
-): Promise<BoardType> {
+): Promise<BoardType> => {
   try {
     return fetch(`/api/boards/${id}`, {
       method: "PUT",
@@ -16,4 +16,6 @@ export default function updateOneById(
     console.warn("Error occurred in Update board: ", error);
     throw error;
   }
-}
+};
+
+export default updateOneById;

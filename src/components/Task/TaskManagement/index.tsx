@@ -16,11 +16,11 @@ type TaskManagementProps = {
   taskIndex: number;
 };
 
-export default function TaskManagement({
+const TaskManagement = ({
   columnId, // it's just index of the column by default 0-2
   taskIndex, // it's index in array of task
   taskId, // index of current task
-}: TaskManagementProps) {
+}: TaskManagementProps) => {
   const { board, setBoard, setIsBoardShouldUpdate } = useContext(BoardContext);
   const [isModalActive, setIsModalActive] = useState<boolean>(false);
   const amountOfColumns = columnInit.length;
@@ -97,4 +97,6 @@ export default function TaskManagement({
       />
     </div>
   );
-}
+};
+
+export default TaskManagement;
