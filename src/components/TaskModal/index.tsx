@@ -3,10 +3,12 @@
 import { useContext, useRef } from "react";
 import { Formik, FormikErrors } from "formik";
 import { useParams, useSearchParams } from "next/navigation";
+import EditInputGroup from "./EditInputGroup";
 import Overlay from "@/components/Overlay";
 import { columnInit } from "@/config/system/columnNames";
 import { BoardContext } from "@/myPages/Home/hooks/useBoardContext";
 import { BoardType, TaskType } from "@/config/system/types/sampleBoard";
+import { CommonStringObj } from "@/config/system/types/generalTypes";
 import style from "./style.module.css";
 
 type TaskModalProps = {
@@ -102,34 +104,24 @@ const TaskModal = ({ setIsModalActive }: TaskModalProps) => {
             isSubmitting,
           }) => (
             <form onSubmit={handleSubmit} className={style.taskFunctionForm}>
-              <div className={style.inputWrapper}>
-                <input
-                  className={style.input}
-                  type="text"
-                  name="title"
-                  placeholder="title:"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.title}
-                />
-                <div className={style.errorMessage}>
-                  {touched.title && errors.title}
-                </div>
-              </div>
-              <div className={style.inputWrapper}>
-                <input
-                  className={style.input}
-                  type="text"
-                  name="description"
-                  placeholder="description:"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.description}
-                />
-                <div className={style.errorMessage}>
-                  {touched.description && errors.description}
-                </div>
-              </div>
+              <EditInputGroup
+                name="title"
+                placeholder="title: "
+                values={values}
+                handleBlur={handleBlur}
+                handleChange={handleChange}
+                touched={touched as CommonStringObj}
+                errors={errors}
+              />
+              <EditInputGroup
+                name="description"
+                placeholder="description: "
+                values={values}
+                handleBlur={handleBlur}
+                handleChange={handleChange}
+                touched={touched as CommonStringObj}
+                errors={errors}
+              />
               <button
                 type="submit"
                 disabled={isSubmitting}

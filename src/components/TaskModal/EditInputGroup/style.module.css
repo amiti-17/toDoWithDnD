@@ -1,0 +1,11 @@
+.inputWrapper {
+}
+
+.errorMessage {
+  width: 100%;
+  padding: 0px 8px;
+  margin: 0px auto;
+  font-size: smaller;
+  color: var(--secondary-color);
+  outline: none;
+}

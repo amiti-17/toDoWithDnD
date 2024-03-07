@@ -1,0 +1,20 @@
+
+.input {
+  width: 100%;
+  padding: 4px 8px;
+  margin: 2px auto;
+  font-size: inherit;
+  border-radius: var(--form-border-radius);
+  border: 1px solid var(--main-color);
+  background-color: var(--main-background-color);
+  color: inherit;
+  outline: none;
+}
+
+.input::placeholder {
+  color: var(--main-color);
+}
+
+.input:focus {
+  outline: 1px solid var(--main-color);
+}
