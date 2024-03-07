@@ -9,14 +9,24 @@ type TaskComponentProps = {
   task: TaskType;
   columnId: number;
   taskIndex: number;
+  activeDragId: string;
 };
-const Task = ({ task, columnId, taskIndex }: TaskComponentProps) => {
+const Task = ({
+  task,
+  columnId,
+  taskIndex,
+  activeDragId,
+}: TaskComponentProps) => {
+  const currentTaskId = task._id.toString();
+
   return (
-    <Draggable draggableId={task._id.toString()} index={taskIndex}>
+    <Draggable draggableId={currentTaskId} index={taskIndex}>
       {(provided) => {
         return (
           <div
-            className={style.taskWrapper}
+            className={`${style.taskWrapper} ${
+              activeDragId === currentTaskId && style.taskWrapperActive
+            }`}
             {...provided.draggableProps}
             {...provided.dragHandleProps}
             ref={provided.innerRef}
@@ -25,7 +35,7 @@ const Task = ({ task, columnId, taskIndex }: TaskComponentProps) => {
             <TaskDescription description={task.description} />
             <TaskManagement
               columnId={columnId}
-              taskId={task._id.toString()}
+              taskId={currentTaskId}
               taskIndex={taskIndex}
             />
           </div>

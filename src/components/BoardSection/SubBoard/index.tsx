@@ -12,9 +12,10 @@ import style from "./style.module.css";
 type SubBoardProps = {
   columnId: number;
   columnName: ColumnIndex;
+  activeDragId: string;
 };
 
-const SubBoard = ({ columnId, columnName }: SubBoardProps) => {
+const SubBoard = ({ columnId, columnName, activeDragId }: SubBoardProps) => {
   const { board } = useContext(BoardContext);
   const params = useParams();
   return (
@@ -29,13 +30,15 @@ const SubBoard = ({ columnId, columnName }: SubBoardProps) => {
           >
             {board[columnName].map((task, taskIndex, arr) => {
               if (!task?._id?.toString()) return <></>;
+              const currentTaskId = task?._id.toString();
               return (
-                <React.Fragment key={task?._id.toString()}>
+                <React.Fragment key={currentTaskId}>
                   <Task
                     columnId={columnId}
                     task={task}
                     taskIndex={taskIndex}
-                    key={task?._id.toString()}
+                    key={currentTaskId}
+                    activeDragId={activeDragId}
                   />
                   {arr.length - 1 !== taskIndex && <hr className={style.hr} />}
                 </React.Fragment>

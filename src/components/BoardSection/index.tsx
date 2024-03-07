@@ -1,5 +1,9 @@
-import { useContext } from "react";
-import { DragDropContext, OnDragEndResponder } from "@hello-pangea/dnd";
+import { useContext, useState } from "react";
+import {
+  DragDropContext,
+  OnBeforeCaptureResponder,
+  OnDragEndResponder,
+} from "@hello-pangea/dnd";
 import SubBoard from "./SubBoard";
 import { columnInit } from "@/config/system/columnNames";
 import { BoardContext } from "@/myPages/Home/hooks/useBoardContext";
@@ -12,6 +16,8 @@ type BoardsSectionProps = {
 
 const BoardsSection = ({ isDeleted, error }: BoardsSectionProps) => {
   const { board, setBoard, setIsBoardShouldUpdate } = useContext(BoardContext);
+  const [activeDragId, setActiveDragId] = useState<string>("");
+
   if (isDeleted) {
     return <div>This board was deleted</div>;
   }
@@ -28,6 +34,7 @@ const BoardsSection = ({ isDeleted, error }: BoardsSectionProps) => {
       source,
       draggableId, // id of dragging task
     } = result;
+    setActiveDragId("");
 
     if (!destination) {
       return;
@@ -54,12 +61,18 @@ const BoardsSection = ({ isDeleted, error }: BoardsSectionProps) => {
     setBoard(newBoard);
     setIsBoardShouldUpdate(true);
   };
+
+  const onBeforeCapture: OnBeforeCaptureResponder = ({ draggableId }) => {
+    setActiveDragId(draggableId ?? "");
+  };
+
   return (
-    <DragDropContext onDragEnd={onDragEnd}>
+    <DragDropContext onDragEnd={onDragEnd} onBeforeCapture={onBeforeCapture}>
       <div className={style.boardWrapper}>
         {columnInit.map((columnName, index) => {
           return (
             <SubBoard
+              activeDragId={activeDragId}
               columnId={index}
               key={index}
               columnName={columnName.title}
