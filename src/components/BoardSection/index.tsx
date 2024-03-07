@@ -8,6 +8,7 @@ import SubBoard from "./SubBoard";
 import { columnInit } from "@/config/system/columnNames";
 import { BoardContext } from "@/myPages/Home/hooks/useBoardContext";
 import style from "./style.module.css";
+import onDragEndHandler from "./onDragEndHandler";
 
 type BoardsSectionProps = {
   isDeleted: boolean;
@@ -29,35 +30,8 @@ const BoardsSection = ({ isDeleted, error }: BoardsSectionProps) => {
   }
 
   const onDragEnd: OnDragEndResponder = (result) => {
-    const {
-      destination,
-      source,
-      draggableId, // id of dragging task
-    } = result;
     setActiveDragId("");
-
-    if (!destination) {
-      return;
-    }
-    if (
-      destination.droppableId === source.droppableId &&
-      destination.index === source.index
-    ) {
-      return;
-    }
-
-    const newBoard = {
-      ...board,
-    };
-    const sourceColumnIndex = columnInit[Number(source.droppableId)].title;
-    const destinationColumnIndex =
-      columnInit[Number(destination.droppableId)].title;
-    let currentTask = newBoard[sourceColumnIndex][source.index];
-
-    newBoard[sourceColumnIndex] = newBoard[sourceColumnIndex].filter(
-      (task) => task._id.toString() !== draggableId
-    );
-    newBoard[destinationColumnIndex].splice(destination.index, 0, currentTask);
+    const newBoard = onDragEndHandler({ result, board });
     setBoard(newBoard);
     setIsBoardShouldUpdate(true);
   };

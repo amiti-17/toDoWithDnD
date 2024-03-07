@@ -1,0 +1,23 @@
+.taskCommand {
+  background-color: var(--third-background-color);
+  padding: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: inherit;
+  justify-self: flex-end;
+  width: 100%;
+  height: 35px;
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  width: 22px;
+  height: auto;
+}
+
+.svg {
+  min-width: 24px;
+  height: auto;
+}

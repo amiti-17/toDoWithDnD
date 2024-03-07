@@ -5,24 +5,18 @@ import { Formik, FormikErrors } from "formik";
 import { useParams, useSearchParams } from "next/navigation";
 import EditInputGroup from "./EditInputGroup";
 import Overlay from "@/components/Overlay";
-import { columnInit } from "@/config/system/columnNames";
 import { BoardContext } from "@/myPages/Home/hooks/useBoardContext";
-import { BoardType, TaskType } from "@/config/system/types/sampleBoard";
 import { CommonStringObj } from "@/config/system/types/generalTypes";
 import style from "./style.module.css";
+import {
+  EditFormType,
+  defaultEditForm,
+} from "@/config/system/types/editFormType";
+import validateEditForm from "./validateEditForm";
+import updateOrCreateTaskFunction from "./updateOrCreateTaskFunction";
 
 type TaskModalProps = {
   setIsModalActive?: React.Dispatch<React.SetStateAction<boolean>>;
-};
-
-type FormType = {
-  title: string;
-  description: string;
-};
-
-const baseFormObj: FormType = {
-  title: "",
-  description: "",
 };
 
 const TaskModal = ({ setIsModalActive }: TaskModalProps) => {
@@ -31,38 +25,36 @@ const TaskModal = ({ setIsModalActive }: TaskModalProps) => {
   const params = useParams();
   const searchParams = useSearchParams();
 
-  const taskFunction = async (
-    values: FormType,
-    errors: FormikErrors<FormType>
+  const handleForm = async (
+    values: EditFormType,
+    errors: FormikErrors<EditFormType>
   ) => {
     if (!errors.title && !errors.description) {
-      const newBoard: BoardType = {
-        ...board,
-      };
-      const columnId = Number(searchParams?.get("columnId"));
-      if (
-        params?.taskParams[0] === "edit" &&
-        searchParams?.get("columnId") &&
-        newBoard
-      ) {
-        newBoard[columnInit[columnId].title] = newBoard[
-          columnInit[columnId].title
-        ].map((el) => {
-          if (el._id.toString() === params.taskParams[1]) {
-            return values as TaskType;
-          }
-          return el;
-        });
-      } else {
-        board[columnInit[0].title].push(values as TaskType);
-      }
+      const [type, taskId] = params?.taskParams as string[];
+      const columnId = searchParams?.get("columnId");
+      const myNewBoard = updateOrCreateTaskFunction({
+        values,
+        board,
+        columnId,
+        type: type ?? "",
+        taskId: taskId ?? "",
+      });
 
-      setBoard(newBoard);
+      setBoard(myNewBoard);
       if (setIsModalActive) {
         setIsModalActive(false);
       }
       setIsBoardShouldUpdate(true);
     }
+  };
+
+  const getInitialValues = () => {
+    return params?.taskParams[0] === "edit"
+      ? ({
+          title: searchParams?.get("title"),
+          description: searchParams?.get("description"),
+        } as EditFormType)
+      : defaultEditForm;
   };
 
   return (
@@ -72,25 +64,10 @@ const TaskModal = ({ setIsModalActive }: TaskModalProps) => {
         onClick={() => setIsModalActive && setIsModalActive(false)}
       >
         <Formik
-          initialValues={
-            params?.taskParams[0] === "edit"
-              ? ({
-                  title: searchParams?.get("title"),
-                  description: searchParams?.get("description"),
-                } as FormType)
-              : baseFormObj
-          }
-          validate={(values: FormType) => {
-            const errors: FormType = { ...baseFormObj };
-            if (!values.title) {
-              errors.title = "Required title";
-            } else if (!values.description) {
-              errors.description = "Required description";
-            }
-            return errors;
-          }}
+          initialValues={getInitialValues()}
+          validate={validateEditForm}
           onSubmit={async (values, { setSubmitting }) => {
-            await taskFunction(values, {});
+            await handleForm(values, {});
             setSubmitting(false);
           }}
         >
@@ -126,7 +103,7 @@ const TaskModal = ({ setIsModalActive }: TaskModalProps) => {
                 type="submit"
                 disabled={isSubmitting}
                 className={style.submit}
-                onClick={async () => await taskFunction(values, errors)}
+                onClick={async () => await handleForm(values, errors)}
               >
                 {params?.taskParams[0] === "edit" ? "Update" : "Create"}
               </button>
