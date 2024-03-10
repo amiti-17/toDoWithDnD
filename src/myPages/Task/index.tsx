@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import TaskModal from "@/components/TaskModal";
 import { BoardType, sampleBoard } from "@/config/system/types/sampleBoard";
@@ -14,6 +14,12 @@ type TaskPageProps = {
 };
 const TaskPage = ({ boardId }: TaskPageProps) => {
   const router = useRouter();
+  const params = useParams();
+  const searchParams = useSearchParams();
+  const [actionType, taskId] = params?.taskParams as string[];
+  const columnId = searchParams?.get("columnId");
+  const oldTitle = searchParams?.get("title");
+  const oldDescription = searchParams?.get("description");
   const [board, setBoard] = useState<BoardType>(sampleBoard);
   const [isBoardShouldUpdate, setIsBoardShouldUpdate] = useState(false);
   const backLink = "/boards/" + boardId;
@@ -44,7 +50,15 @@ const TaskPage = ({ boardId }: TaskPageProps) => {
       <Link href={backLink} className={style.backButton}>
         Back
       </Link>
-      <TaskModal setIsModalActive={undefined}></TaskModal>
+      <TaskModal
+        isModalActive={false}
+        setIsModalActive={() => {}}
+        actionType={actionType}
+        taskId={taskId}
+        columnId={columnId}
+        oldTitle={oldTitle}
+        oldDescription={oldDescription}
+      ></TaskModal>
     </BoardContext.Provider>
   );
 };

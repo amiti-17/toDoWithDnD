@@ -6,7 +6,7 @@ type UpdateOrCreateTaskFunctionProps = {
   values: EditFormType;
   board: BoardType;
   columnId: string | null;
-  type: string;
+  actionType: string;
   taskId: string;
 };
 
@@ -14,14 +14,17 @@ const updateOrCreateTaskFunction = ({
   values,
   board,
   columnId,
-  type,
+  actionType,
   taskId,
 }: UpdateOrCreateTaskFunctionProps): BoardType => {
   const newBoard: BoardType = {
     ...board,
   };
-  const columnIdNum = Number(columnId);
-  if (type === "edit" && columnId && newBoard) {
+  if (actionType === "edit" && newBoard) {
+    if (!columnId) {
+      throw new Error("Error in updateOrCreateTask, columnId is required");
+    }
+    const columnIdNum = Number(columnId);
     newBoard[columnInit[columnIdNum].title] = newBoard[
       columnInit[columnIdNum].title
     ].map((el) => {

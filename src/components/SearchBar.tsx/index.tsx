@@ -11,10 +11,10 @@ import { BoardContext } from "@/myPages/Home/hooks/useBoardContext";
 import style from "./style.module.css";
 
 type SearchBarProps = {
-  setIsDeleted: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsBoardDeleted: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-export default function SearchBar({ setIsDeleted }: SearchBarProps) {
+export default function SearchBar({ setIsBoardDeleted }: SearchBarProps) {
   const router = useRouter();
   const { board } = useContext(BoardContext);
   console.log(board);
@@ -94,7 +94,7 @@ export default function SearchBar({ setIsDeleted }: SearchBarProps) {
       </Formik>
       <CollapseActions
         isOpened={collapseIsOpen}
-        setIsDeleted={setIsDeleted}
+        setIsDeleted={setIsBoardDeleted}
         currentId={board?._id?.toString()}
       />
     </header>

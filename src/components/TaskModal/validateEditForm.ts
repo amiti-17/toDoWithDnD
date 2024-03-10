@@ -5,8 +5,8 @@ import {
 
 const validateEditForm = (values: EditFormType): EditFormType => {
   const errors: EditFormType = { ...defaultEditForm };
-  if (!values.title) {
-    errors.title = "Required title";
+  if (!values.title.trim()) {
+    errors.title = "Required title, just space - not allowed";
   } else if (!values.description) {
     errors.description = "Required description";
   }

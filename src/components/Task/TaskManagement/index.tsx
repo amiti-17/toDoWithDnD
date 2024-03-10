@@ -9,17 +9,22 @@ import { columnInit } from "@/config/system/columnNames";
 import { BoardType } from "@/config/system/types/sampleBoard";
 import CreateTaskModal from "@/components/TaskModal";
 import style from "./style.module.css";
+import { TaskModalProps } from "@/config/system/types/taskModalComponentProps";
 
 type TaskManagementProps = {
   columnId: number;
   taskId: string;
   taskIndex: number;
+  taskModalProps: TaskModalProps;
+  setTaskModalProps: React.Dispatch<React.SetStateAction<TaskModalProps>>;
 };
 
 const TaskManagement = ({
   columnId, // it's just index of the column by default 0-2
   taskIndex, // it's index in array of task
   taskId, // index of current task
+  taskModalProps,
+  setTaskModalProps,
 }: TaskManagementProps) => {
   const { board, setBoard, setIsBoardShouldUpdate } = useContext(BoardContext);
   const [isModalActive, setIsModalActive] = useState<boolean>(false);
@@ -68,7 +73,17 @@ const TaskManagement = ({
 
   return (
     <div className={style.managementWrapper}>
-      {isModalActive && <CreateTaskModal setIsModalActive={setIsModalActive} />}
+      {isModalActive && (
+        <CreateTaskModal
+          setIsModalActive={setIsModalActive}
+          isModalActive={isModalActive}
+          actionType="create"
+          columnId={null}
+          taskId={null}
+          oldTitle={null}
+          oldDescription={null}
+        />
+      )}
       <FaLongArrowAltLeft
         className={`${style.svg} ${columnId === 0 ? style.disabled : ""}`}
         title="move left"

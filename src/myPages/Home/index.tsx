@@ -14,6 +14,11 @@ import { BoardContext } from "./hooks/useBoardContext";
 import style from "./style.module.css";
 import dbAPI from "@/dbAPI";
 import LoadingCircle from "@/components/LoadingCircle";
+import TaskModal from "@/components/TaskModal";
+import {
+  TaskModalProps,
+  initialTaskModalProps,
+} from "@/config/system/types/taskModalComponentProps";
 
 const Home = ({ id }: { id: string | undefined }) => {
   const [board, setBoard] = useState<BoardType>(sampleBoard);
@@ -22,7 +27,11 @@ const Home = ({ id }: { id: string | undefined }) => {
     useState<boolean>(false);
   const router = useRouter();
   const [loading, setLoading] = useState(true);
-  const [isDeleted, setIsDeleted] = useState<boolean>(false);
+  const [isBoardDeleted, setIsBoardDeleted] = useState<boolean>(false);
+  const [isModalActive, setIsModalActive] = useState<boolean>(false);
+  const [taskModalProps, setTaskModalProps] = useState<TaskModalProps>(
+    initialTaskModalProps
+  );
 
   useEffect(() => {
     setLoading(true);
@@ -71,12 +80,20 @@ const Home = ({ id }: { id: string | undefined }) => {
       value={{ board, setBoard, isBoardShouldUpdate, setIsBoardShouldUpdate }}
     >
       <div className={style.searchBarWrapper}>
-        <SearchBar setIsDeleted={setIsDeleted} />
+        <SearchBar setIsBoardDeleted={setIsBoardDeleted} />
         {loading && <LoadingCircle />}
-        {!loading && <BoardsSection isDeleted={isDeleted} error={error} />}
+        {isModalActive && <TaskModal {...taskModalProps} />}
+        {!loading && (
+          <BoardsSection
+            isDeleted={isBoardDeleted}
+            error={error}
+            taskModalProps={taskModalProps}
+            setTaskModalProps={setTaskModalProps}
+          />
+        )}
       </div>
     </BoardContext.Provider>
   );
-}
+};
 
 export default Home;

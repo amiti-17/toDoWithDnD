@@ -2,8 +2,14 @@ import Link from "next/link";
 import { MdLibraryAdd } from "react-icons/md";
 import style from "./style.module.css";
 import { useParams } from "next/navigation";
+import { TaskModalProps } from "@/config/system/types/taskModalComponentProps";
 
-const TaskCommands = () => {
+type TaskCommandsProps = {
+  taskModalProps: TaskModalProps;
+  setTaskModalProps: React.Dispatch<React.SetStateAction<TaskModalProps>>;
+};
+
+const TaskCommands = ({}: TaskCommandsProps) => {
   const params = useParams();
 
   return (

@@ -2,63 +2,58 @@
 
 import { useContext, useRef } from "react";
 import { Formik, FormikErrors } from "formik";
-import { useParams, useSearchParams } from "next/navigation";
 import EditInputGroup from "./EditInputGroup";
 import Overlay from "@/components/Overlay";
 import { BoardContext } from "@/myPages/Home/hooks/useBoardContext";
 import { CommonStringObj } from "@/config/system/types/generalTypes";
-import style from "./style.module.css";
 import {
   EditFormType,
   defaultEditForm,
 } from "@/config/system/types/editFormType";
 import validateEditForm from "./validateEditForm";
-import updateOrCreateTaskFunction from "./updateOrCreateTaskFunction";
+import handleEditForm from "./handleEditForm";
+import style from "./style.module.css";
+import { TaskModalProps } from "@/config/system/types/taskModalComponentProps";
 
-type TaskModalProps = {
-  setIsModalActive?: React.Dispatch<React.SetStateAction<boolean>>;
-};
-
-const TaskModal = ({ setIsModalActive }: TaskModalProps) => {
+const TaskModal = ({
+  isModalActive,
+  setIsModalActive,
+  actionType,
+  taskId,
+  columnId,
+  oldTitle,
+  oldDescription,
+}: TaskModalProps) => {
   const { board, setBoard, setIsBoardShouldUpdate } = useContext(BoardContext);
   const overlay = useRef(null);
-  const params = useParams();
-  const searchParams = useSearchParams();
 
-  const handleForm = async (
+  const handleForm = (
     values: EditFormType,
     errors: FormikErrors<EditFormType>
-  ) => {
-    if (!errors.title && !errors.description) {
-      const [type, taskId] = params?.taskParams as string[];
-      const columnId = searchParams?.get("columnId");
-      const myNewBoard = updateOrCreateTaskFunction({
-        values,
-        board,
-        columnId,
-        type: type ?? "",
-        taskId: taskId ?? "",
-      });
-
-      setBoard(myNewBoard);
-      if (setIsModalActive) {
-        setIsModalActive(false);
-      }
-      setIsBoardShouldUpdate(true);
-    }
-  };
+  ) =>
+    handleEditForm({
+      values,
+      errors,
+      board,
+      columnId,
+      actionType,
+      taskId,
+      setBoard,
+      setIsModalActive,
+      setIsBoardShouldUpdate,
+    });
 
   const getInitialValues = () => {
-    return params?.taskParams[0] === "edit"
+    return actionType === "edit"
       ? ({
-          title: searchParams?.get("title"),
-          description: searchParams?.get("description"),
+          title: oldTitle,
+          description: oldDescription,
         } as EditFormType)
       : defaultEditForm;
   };
 
   return (
-    <Overlay ref={overlay} isModalActive={Boolean(setIsModalActive)}>
+    <Overlay ref={overlay} isModalActive={isModalActive}>
       <div
         className={style.modalWrapper}
         onClick={() => setIsModalActive && setIsModalActive(false)}
@@ -105,7 +100,7 @@ const TaskModal = ({ setIsModalActive }: TaskModalProps) => {
                 className={style.submit}
                 onClick={async () => await handleForm(values, errors)}
               >
-                {params?.taskParams[0] === "edit" ? "Update" : "Create"}
+                {actionType === "edit" ? "Update" : "Create"}
               </button>
             </form>
           )}
