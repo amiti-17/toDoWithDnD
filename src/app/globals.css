@@ -44,6 +44,8 @@ body {
 }
 
 body {
+  max-width: var(--max-width);
+  margin: 0px auto;
   margin-top: 10px;
 }
 

@@ -11,26 +11,32 @@ import style from "./style.module.css";
 import onDragEndHandler from "./onDragEndHandler";
 import { TaskModalProps } from "@/config/system/types/taskModalComponentProps";
 import TaskModal from "../TaskModal";
+import ErrorComponent from "../ErrorComponent";
 
 type BoardsSectionProps = {
-  taskModalProps: TaskModalProps;
-  setTaskModalProps: React.Dispatch<React.SetStateAction<TaskModalProps>>;
+  // taskModalProps: TaskModalProps;
+  // setTaskModalProps: React.Dispatch<React.SetStateAction<TaskModalProps>>;
   isDeleted: boolean;
   error: string;
 };
 
-const BoardsSection = ({ isDeleted, error, taskModalProps, setTaskModalProps }: BoardsSectionProps) => {
+const BoardsSection = ({
+  isDeleted,
+  error,
+}: // taskModalProps,
+// setTaskModalProps,
+BoardsSectionProps) => {
   const { board, setBoard, setIsBoardShouldUpdate } = useContext(BoardContext);
   const [activeDragId, setActiveDragId] = useState<string>("");
 
   if (isDeleted) {
-    return <div>This board was deleted</div>;
+    return <ErrorComponent>This board was deleted</ErrorComponent>;
   }
   if (error) {
-    return <div>{error}</div>;
+    return <ErrorComponent>{error}</ErrorComponent>;
   }
   if (board?._id === undefined) {
-    return <div>{"This board doesn't exists"}</div>;
+    return <ErrorComponent>{"This board doesn't exists"}</ErrorComponent>;
   }
 
   const onDragEnd: OnDragEndResponder = (result) => {
@@ -50,8 +56,8 @@ const BoardsSection = ({ isDeleted, error, taskModalProps, setTaskModalProps }: 
         {columnInit.map((columnName, index) => {
           return (
             <SubBoard
-              taskModalProps={taskModalProps}
-              setTaskModalProps={setTaskModalProps}
+              // taskModalProps={taskModalProps}
+              // setTaskModalProps={setTaskModalProps}
               activeDragId={activeDragId}
               columnId={index}
               key={index}

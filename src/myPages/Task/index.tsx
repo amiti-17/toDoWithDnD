@@ -12,10 +12,12 @@ import dbAPI from "@/dbAPI";
 type TaskPageProps = {
   boardId: string;
 };
-const TaskPage = ({ boardId }: TaskPageProps) => {
+
+const TaskPage = () => {
   const router = useRouter();
   const params = useParams();
   const searchParams = useSearchParams();
+  const boardId = params.id as string;
   const [actionType, taskId] = params?.taskParams as string[];
   const columnId = searchParams?.get("columnId");
   const oldTitle = searchParams?.get("title");
@@ -47,18 +49,15 @@ const TaskPage = ({ boardId }: TaskPageProps) => {
     <BoardContext.Provider
       value={{ board, setBoard, isBoardShouldUpdate, setIsBoardShouldUpdate }}
     >
-      <Link href={backLink} className={style.backButton}>
-        Back
-      </Link>
       <TaskModal
-        isModalActive={false}
-        setIsModalActive={() => {}}
+        // isModalActive={false}
+        // setIsModalActive={() => {}}
         actionType={actionType}
         taskId={taskId}
         columnId={columnId}
         oldTitle={oldTitle}
         oldDescription={oldDescription}
-      ></TaskModal>
+      />
     </BoardContext.Provider>
   );
 };

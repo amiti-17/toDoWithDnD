@@ -1,43 +1,37 @@
 import Link from "next/link";
-import { useParams } from "next/navigation";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { MdEditSquare } from "react-icons/md";
 import { HiArchiveBoxXMark } from "react-icons/hi2";
 import { FaLongArrowAltLeft, FaLongArrowAltRight } from "react-icons/fa";
 import { BoardContext } from "@/myPages/Home/hooks/useBoardContext";
 import { columnInit } from "@/config/system/columnNames";
 import { BoardType } from "@/config/system/types/sampleBoard";
-import CreateTaskModal from "@/components/TaskModal";
 import style from "./style.module.css";
-import { TaskModalProps } from "@/config/system/types/taskModalComponentProps";
 
 type TaskManagementProps = {
   columnId: number;
   taskId: string;
   taskIndex: number;
-  taskModalProps: TaskModalProps;
-  setTaskModalProps: React.Dispatch<React.SetStateAction<TaskModalProps>>;
+  // taskModalProps: TaskModalProps;
+  // setTaskModalProps: React.Dispatch<React.SetStateAction<TaskModalProps>>;
 };
 
 const TaskManagement = ({
   columnId, // it's just index of the column by default 0-2
   taskIndex, // it's index in array of task
   taskId, // index of current task
-  taskModalProps,
-  setTaskModalProps,
 }: TaskManagementProps) => {
   const { board, setBoard, setIsBoardShouldUpdate } = useContext(BoardContext);
-  const [isModalActive, setIsModalActive] = useState<boolean>(false);
+  const boardId = board._id.toString();
   const amountOfColumns = columnInit.length;
   const columnTitle = columnInit[columnId].title;
   const currentTask = board[columnTitle][taskIndex];
-  const params = useParams();
 
   function deleteTask(): BoardType {
     const newBoard = {
       ...board,
       [columnTitle]: board[columnTitle].filter(
-        (task) => task._id.toString() !== currentTask._id.toString()
+        (task) => task._id.toString() !== taskId
       ),
     };
     return newBoard;
@@ -73,17 +67,6 @@ const TaskManagement = ({
 
   return (
     <div className={style.managementWrapper}>
-      {isModalActive && (
-        <CreateTaskModal
-          setIsModalActive={setIsModalActive}
-          isModalActive={isModalActive}
-          actionType="create"
-          columnId={null}
-          taskId={null}
-          oldTitle={null}
-          oldDescription={null}
-        />
-      )}
       <FaLongArrowAltLeft
         className={`${style.svg} ${columnId === 0 ? style.disabled : ""}`}
         title="move left"
@@ -97,14 +80,15 @@ const TaskManagement = ({
         onClick={moveRight}
       />
       <Link
-        href={`/boards/${params?.id}/task/edit/${taskId}?columnId=${columnId}&title=${currentTask.title}&description=${currentTask.description}`}
+        // as={`/boards/${boardId}/task/edit/${taskId}?columnId=${columnId}&title=${currentTask.title}&description=${currentTask.description}`}
+        href={`/boards/${boardId}?actionType=edit&taskId=${taskId}&columnId=${columnId}&title=${currentTask.title}&description=${currentTask.description}`}
         scroll={false}
         shallow={true}
         className={style.link}
+        prefetch={true}
       >
         <MdEditSquare title="edit this task" className={style.svg} />
       </Link>
-
       <HiArchiveBoxXMark
         title="delete this task"
         className={style.svg}

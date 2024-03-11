@@ -1,6 +1,6 @@
 export type TaskModalProps = {
-  isModalActive: boolean;
-  setIsModalActive: React.Dispatch<React.SetStateAction<boolean>>;
+  // isModalActive: boolean;
+  // setIsModalActive: React.Dispatch<React.SetStateAction<boolean>>;
   actionType: string;
   taskId: string | null;
   columnId: string | null;
@@ -9,8 +9,8 @@ export type TaskModalProps = {
 };
 
 export const initialTaskModalProps: TaskModalProps = {
-  isModalActive: false,
-  setIsModalActive: () => {},
+  // isModalActive: false,
+  // setIsModalActive: () => {},
   actionType: "",
   taskId: null,
   columnId: null,

@@ -11,17 +11,17 @@ type TaskComponentProps = {
   columnId: number;
   taskIndex: number;
   activeDragId: string;
-  taskModalProps: TaskModalProps;
-  setTaskModalProps: React.Dispatch<React.SetStateAction<TaskModalProps>>;
+  // taskModalProps: TaskModalProps;
+  // setTaskModalProps: React.Dispatch<React.SetStateAction<TaskModalProps>>;
 };
 const Task = ({
   task,
   columnId,
   taskIndex,
   activeDragId,
-  taskModalProps,
-  setTaskModalProps,
-}: TaskComponentProps) => {
+}: // taskModalProps,
+// setTaskModalProps,
+TaskComponentProps) => {
   const currentTaskId = task._id.toString();
 
   return (
@@ -39,8 +39,8 @@ const Task = ({
             <TaskTitle title={task.title} />
             <TaskDescription description={task.description} />
             <TaskManagement
-              taskModalProps={taskModalProps}
-              setTaskModalProps={setTaskModalProps}
+              // taskModalProps={taskModalProps}
+              // setTaskModalProps={setTaskModalProps}
               columnId={columnId}
               taskId={currentTaskId}
               taskIndex={taskIndex}

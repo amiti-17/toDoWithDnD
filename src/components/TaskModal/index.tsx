@@ -1,11 +1,14 @@
 "use client";
 
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useContext, useRef } from "react";
 import { Formik, FormikErrors } from "formik";
 import EditInputGroup from "./EditInputGroup";
 import Overlay from "@/components/Overlay";
 import { BoardContext } from "@/myPages/Home/hooks/useBoardContext";
 import { CommonStringObj } from "@/config/system/types/generalTypes";
+import { TaskModalProps } from "@/config/system/types/taskModalComponentProps";
 import {
   EditFormType,
   defaultEditForm,
@@ -13,11 +16,10 @@ import {
 import validateEditForm from "./validateEditForm";
 import handleEditForm from "./handleEditForm";
 import style from "./style.module.css";
-import { TaskModalProps } from "@/config/system/types/taskModalComponentProps";
 
 const TaskModal = ({
-  isModalActive,
-  setIsModalActive,
+  // isModalActive,
+  // setIsModalActive,
   actionType,
   taskId,
   columnId,
@@ -25,6 +27,9 @@ const TaskModal = ({
   oldDescription,
 }: TaskModalProps) => {
   const { board, setBoard, setIsBoardShouldUpdate } = useContext(BoardContext);
+  const router = useRouter();
+  const boardId = board._id.toString();
+  const backLink = "/boards/" + boardId;
   const overlay = useRef(null);
 
   const handleForm = (
@@ -38,8 +43,9 @@ const TaskModal = ({
       columnId,
       actionType,
       taskId,
+      router,
+      backLink,
       setBoard,
-      setIsModalActive,
       setIsBoardShouldUpdate,
     });
 
@@ -53,59 +59,60 @@ const TaskModal = ({
   };
 
   return (
-    <Overlay ref={overlay} isModalActive={isModalActive}>
-      <div
-        className={style.modalWrapper}
-        onClick={() => setIsModalActive && setIsModalActive(false)}
+    <Overlay ref={overlay} close={router.back}>
+      <Formik
+        initialValues={getInitialValues()}
+        validate={validateEditForm}
+        onSubmit={async (values, { setSubmitting }) => {
+          await handleForm(values, {});
+          setSubmitting(false);
+        }}
       >
-        <Formik
-          initialValues={getInitialValues()}
-          validate={validateEditForm}
-          onSubmit={async (values, { setSubmitting }) => {
-            await handleForm(values, {});
-            setSubmitting(false);
-          }}
-        >
-          {({
-            values,
-            errors,
-            touched,
-            handleChange,
-            handleBlur,
-            handleSubmit,
-            isSubmitting,
-          }) => (
-            <form onSubmit={handleSubmit} className={style.taskFunctionForm}>
-              <EditInputGroup
-                name="title"
-                placeholder="title: "
-                values={values}
-                handleBlur={handleBlur}
-                handleChange={handleChange}
-                touched={touched as CommonStringObj}
-                errors={errors}
-              />
-              <EditInputGroup
-                name="description"
-                placeholder="description: "
-                values={values}
-                handleBlur={handleBlur}
-                handleChange={handleChange}
-                touched={touched as CommonStringObj}
-                errors={errors}
-              />
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className={style.submit}
-                onClick={async () => await handleForm(values, errors)}
-              >
-                {actionType === "edit" ? "Update" : "Create"}
-              </button>
-            </form>
-          )}
-        </Formik>
-      </div>
+        {({
+          values,
+          errors,
+          touched,
+          handleChange,
+          handleBlur,
+          handleSubmit,
+          isSubmitting,
+        }) => (
+          <form onSubmit={handleSubmit} className={style.taskFunctionForm}>
+            <EditInputGroup
+              name="title"
+              placeholder="title: "
+              values={values}
+              handleBlur={handleBlur}
+              handleChange={handleChange}
+              touched={touched as CommonStringObj}
+              errors={errors}
+            />
+            <EditInputGroup
+              name="description"
+              placeholder="description: "
+              values={values}
+              handleBlur={handleBlur}
+              handleChange={handleChange}
+              touched={touched as CommonStringObj}
+              errors={errors}
+            />
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              className={style.submit}
+              onClick={async () => await handleForm(values, errors)}
+            >
+              {actionType === "edit" ? "Update" : "Create"}
+            </button>
+            <Link href={backLink} className={style.backButton}>
+              Back
+            </Link>
+            {/* <button onClick={router.back} className={style.backButton}>
+              Back
+            </button> */}
+          </form>
+        )}
+      </Formik>
     </Overlay>
   );
 };

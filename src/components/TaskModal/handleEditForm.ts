@@ -1,6 +1,7 @@
-import { EditFormType } from "@/config/system/types/editFormType";
 import { FormikErrors } from "formik";
+import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 import updateOrCreateTaskFunction from "./updateOrCreateTaskFunction";
+import { EditFormType } from "@/config/system/types/editFormType";
 import { BoardType } from "@/config/system/types/sampleBoard";
 
 type HandleEditFormProps = {
@@ -10,8 +11,10 @@ type HandleEditFormProps = {
   columnId: string | null;
   actionType: string;
   taskId: string | null;
+  router: AppRouterInstance;
+  backLink: string;
   setBoard: React.Dispatch<React.SetStateAction<BoardType>>;
-  setIsModalActive: React.Dispatch<React.SetStateAction<boolean>>;
+  // setIsModalActive: React.Dispatch<React.SetStateAction<boolean>>;
   setIsBoardShouldUpdate: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
@@ -22,8 +25,10 @@ const handleEditForm = async ({
   columnId,
   actionType,
   taskId,
+  router,
+  backLink,
   setBoard,
-  setIsModalActive,
+  // setIsModalActive,
   setIsBoardShouldUpdate,
 }: HandleEditFormProps) => {
   if (!errors.title && !errors.description) {
@@ -36,10 +41,8 @@ const handleEditForm = async ({
     });
 
     setBoard(myNewBoard);
-    if (setIsModalActive) {
-      setIsModalActive(false);
-    }
     setIsBoardShouldUpdate(true);
+    router.push(backLink);
   }
 };
 

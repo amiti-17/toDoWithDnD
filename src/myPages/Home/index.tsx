@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useParams, useSearchParams } from "next/navigation";
 import {
   BoardErrorType,
   BoardType,
@@ -15,27 +15,24 @@ import style from "./style.module.css";
 import dbAPI from "@/dbAPI";
 import LoadingCircle from "@/components/LoadingCircle";
 import TaskModal from "@/components/TaskModal";
-import {
-  TaskModalProps,
-  initialTaskModalProps,
-} from "@/config/system/types/taskModalComponentProps";
+import getTaskPropsFromSearchParams from "./getTaskPropsFromSearchParams";
 
-const Home = ({ id }: { id: string | undefined }) => {
+const Home = () => {
   const [board, setBoard] = useState<BoardType>(sampleBoard);
   const [error, setError] = useState<string>("");
   const [isBoardShouldUpdate, setIsBoardShouldUpdate] =
     useState<boolean>(false);
   const router = useRouter();
+  const params = useParams();
+  const searchParams = useSearchParams();
+  const id = params?.id as string | undefined;
+  const { taskActionType, taskId, columnId, oldTaskTitle, oldTaskDescription } =
+    getTaskPropsFromSearchParams(searchParams);
   const [loading, setLoading] = useState(true);
   const [isBoardDeleted, setIsBoardDeleted] = useState<boolean>(false);
-  const [isModalActive, setIsModalActive] = useState<boolean>(false);
-  const [taskModalProps, setTaskModalProps] = useState<TaskModalProps>(
-    initialTaskModalProps
-  );
 
   useEffect(() => {
     setLoading(true);
-    console.log("from home component", board);
     if (isBoardShouldUpdate) {
       (async () => {
         if (id) {
@@ -73,6 +70,7 @@ const Home = ({ id }: { id: string | undefined }) => {
       }
     })();
     setLoading(false);
+    console.log(params);
   }, [id]);
 
   return (
@@ -82,15 +80,16 @@ const Home = ({ id }: { id: string | undefined }) => {
       <div className={style.searchBarWrapper}>
         <SearchBar setIsBoardDeleted={setIsBoardDeleted} />
         {loading && <LoadingCircle />}
-        {isModalActive && <TaskModal {...taskModalProps} />}
-        {!loading && (
-          <BoardsSection
-            isDeleted={isBoardDeleted}
-            error={error}
-            taskModalProps={taskModalProps}
-            setTaskModalProps={setTaskModalProps}
+        {taskActionType && (
+          <TaskModal
+            actionType={taskActionType}
+            taskId={taskId}
+            columnId={columnId}
+            oldTitle={oldTaskTitle}
+            oldDescription={oldTaskDescription}
           />
         )}
+        {!loading && <BoardsSection isDeleted={isBoardDeleted} error={error} />}
       </div>
     </BoardContext.Provider>
   );

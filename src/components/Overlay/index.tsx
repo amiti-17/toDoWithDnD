@@ -1,21 +1,21 @@
 import { LegacyRef, ReactNode, forwardRef } from "react";
 import style from "./style.module.css";
+import Link from "next/link";
 
 // eslint-disable-next-line react/display-name
 const Overlay = forwardRef(
   (
-    {
-      isModalActive,
-      children,
-    }: { children: ReactNode; isModalActive: boolean },
+    { children, close }: { children: ReactNode; close: () => void },
     ref: LegacyRef<HTMLDivElement> | undefined
   ) => {
-    if (!isModalActive) {
-      return <>{children}</>;
-    }
     return (
-      <div ref={ref} className={style.overlay}>
-        {children}
+      <div ref={ref} className={style.overlay} onClick={close}>
+        <div
+          className={style.modalWrapper}
+          onClick={(e) => e.stopPropagation()}
+        >
+          {children}
+        </div>
       </div>
     );
   }

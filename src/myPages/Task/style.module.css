@@ -1,14 +1,1 @@
-.backButton {
-  display: inline-block;
-  min-width: 60px;
-  min-height: 30px;
-  padding: 8px 12px;
-  margin: 10px 15px;
-  text-align: center;
-  font-size: larger;
-  border-radius: 15px;
-  background-color: var(--main-background-color);
-  color: var(--main-color);
-  cursor: pointer;
-  border: 1px solid var(--main-border-color);
-}
+
