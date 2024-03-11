@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useContext, useRef } from "react";
+import { useContext } from "react";
 import { Formik, FormikErrors } from "formik";
 import EditInputGroup from "./EditInputGroup";
 import Overlay from "@/components/Overlay";
@@ -13,13 +13,11 @@ import {
   EditFormType,
   defaultEditForm,
 } from "@/config/system/types/editFormType";
-import validateEditForm from "./validateEditForm";
-import handleEditForm from "./handleEditForm";
+import validateEditForm from "@/functions/editForm/validateEditForm";
+import handleEditForm from "@/functions/editForm/handleEditForm";
 import style from "./style.module.css";
 
 const TaskModal = ({
-  // isModalActive,
-  // setIsModalActive,
   actionType,
   taskId,
   columnId,
@@ -30,7 +28,6 @@ const TaskModal = ({
   const router = useRouter();
   const boardId = board._id.toString();
   const backLink = "/boards/" + boardId;
-  const overlay = useRef(null);
 
   const handleForm = (
     values: EditFormType,
@@ -59,7 +56,7 @@ const TaskModal = ({
   };
 
   return (
-    <Overlay ref={overlay} close={router.back}>
+    <Overlay close={router.back}>
       <Formik
         initialValues={getInitialValues()}
         validate={validateEditForm}
@@ -107,9 +104,6 @@ const TaskModal = ({
             <Link href={backLink} className={style.backButton}>
               Back
             </Link>
-            {/* <button onClick={router.back} className={style.backButton}>
-              Back
-            </button> */}
           </form>
         )}
       </Formik>

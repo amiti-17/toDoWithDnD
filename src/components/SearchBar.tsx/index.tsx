@@ -17,7 +17,6 @@ type SearchBarProps = {
 export default function SearchBar({ setIsBoardDeleted }: SearchBarProps) {
   const router = useRouter();
   const { board } = useContext(BoardContext);
-  console.log(board);
 
   const onSubmitForm = async (
     value: { idField: string },

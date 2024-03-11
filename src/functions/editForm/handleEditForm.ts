@@ -1,6 +1,6 @@
 import { FormikErrors } from "formik";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
-import updateOrCreateTaskFunction from "./updateOrCreateTaskFunction";
+import updateOrCreateTaskFunction from "../../components/TaskModal/updateOrCreateTaskFunction";
 import { EditFormType } from "@/config/system/types/editFormType";
 import { BoardType } from "@/config/system/types/sampleBoard";
 

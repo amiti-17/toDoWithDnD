@@ -5,7 +5,6 @@ import style from "./style.module.css";
 
 const TaskCommands = () => {
   const pathname = usePathname();
-  console.log(pathname);
 
   return (
     <div className={style.taskCommand}>

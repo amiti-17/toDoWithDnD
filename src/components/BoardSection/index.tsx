@@ -9,23 +9,14 @@ import { columnInit } from "@/config/system/columnNames";
 import { BoardContext } from "@/myPages/Home/hooks/useBoardContext";
 import style from "./style.module.css";
 import onDragEndHandler from "./onDragEndHandler";
-import { TaskModalProps } from "@/config/system/types/taskModalComponentProps";
-import TaskModal from "../TaskModal";
 import ErrorComponent from "../ErrorComponent";
 
 type BoardsSectionProps = {
-  // taskModalProps: TaskModalProps;
-  // setTaskModalProps: React.Dispatch<React.SetStateAction<TaskModalProps>>;
   isDeleted: boolean;
   error: string;
 };
 
-const BoardsSection = ({
-  isDeleted,
-  error,
-}: // taskModalProps,
-// setTaskModalProps,
-BoardsSectionProps) => {
+const BoardsSection = ({ isDeleted, error }: BoardsSectionProps) => {
   const { board, setBoard, setIsBoardShouldUpdate } = useContext(BoardContext);
   const [activeDragId, setActiveDragId] = useState<string>("");
 
@@ -56,8 +47,6 @@ BoardsSectionProps) => {
         {columnInit.map((columnName, index) => {
           return (
             <SubBoard
-              // taskModalProps={taskModalProps}
-              // setTaskModalProps={setTaskModalProps}
               activeDragId={activeDragId}
               columnId={index}
               key={index}

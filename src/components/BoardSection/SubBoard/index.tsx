@@ -6,23 +6,14 @@ import DroppableArea from "./DroppableArea";
 import TaskCommands from "./TaskCommands";
 import { BoardContext } from "@/myPages/Home/hooks/useBoardContext";
 import Task from "@/components/Task";
-import { TaskModalProps } from "@/config/system/types/taskModalComponentProps";
 
 type SubBoardProps = {
   columnId: number;
   columnName: ColumnIndex;
   activeDragId: string;
-  // taskModalProps: TaskModalProps;
-  // setTaskModalProps: React.Dispatch<React.SetStateAction<TaskModalProps>>;
 };
 
-const SubBoard = ({
-  columnId,
-  columnName,
-  activeDragId,
-}: // taskModalProps,
-// setTaskModalProps,
-SubBoardProps) => {
+const SubBoard = ({ columnId, columnName, activeDragId }: SubBoardProps) => {
   const { board } = useContext(BoardContext);
 
   return (
@@ -35,25 +26,18 @@ SubBoardProps) => {
           return (
             <React.Fragment key={currentTaskId}>
               <Task
-                // taskModalProps={taskModalProps}
-                // setTaskModalProps={setTaskModalProps}
                 columnId={columnId}
                 task={task}
                 taskIndex={taskIndex}
-                key={currentTaskId}
                 activeDragId={activeDragId}
+                key={currentTaskId}
               />
               {arr.length - 1 !== taskIndex && <hr className={style.hr} />}
             </React.Fragment>
           );
         })}
       </DroppableArea>
-      {!columnId && (
-        <TaskCommands
-        // taskModalProps={taskModalProps}
-        // setTaskModalProps={setTaskModalProps}
-        />
-      )}
+      {!columnId && <TaskCommands />}
     </div>
   );
 };

@@ -1,17 +1,12 @@
 "use client";
 
-import Link from "next/link";
-import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
+import dbAPI from "@/dbAPI";
 import TaskModal from "@/components/TaskModal";
 import { BoardType, sampleBoard } from "@/config/system/types/sampleBoard";
 import { BoardContext } from "../Home/hooks/useBoardContext";
-import style from "./style.module.css";
-import dbAPI from "@/dbAPI";
-
-type TaskPageProps = {
-  boardId: string;
-};
+import boardShouldUpdateHandler from "@/functions/boardHandlers/boardShouldUpdateHandler";
 
 const TaskPage = () => {
   const router = useRouter();
@@ -27,13 +22,15 @@ const TaskPage = () => {
   const backLink = "/boards/" + boardId;
 
   useEffect(() => {
-    console.log("from Task component", board);
     if (isBoardShouldUpdate) {
-      (async () => {
-        const newBoard = await dbAPI.update(boardId, board);
-        setBoard(newBoard);
-      })();
-      setIsBoardShouldUpdate(false);
+      (async () =>
+        await boardShouldUpdateHandler({
+          isBoardShouldUpdate,
+          setIsBoardShouldUpdate,
+          board,
+          setBoard,
+          boardId: boardId ?? "",
+        }))();
       router.push(backLink);
     }
   }, [isBoardShouldUpdate]);
@@ -50,8 +47,6 @@ const TaskPage = () => {
       value={{ board, setBoard, isBoardShouldUpdate, setIsBoardShouldUpdate }}
     >
       <TaskModal
-        // isModalActive={false}
-        // setIsModalActive={() => {}}
         actionType={actionType}
         taskId={taskId}
         columnId={columnId}
