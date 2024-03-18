@@ -6,11 +6,11 @@ import { useContext, useState } from "react";
 import { Formik, FormikErrors } from "formik";
 import dbAPI from "@/dbAPI";
 import { BoardContext } from "@/context/Board";
+import { stringConst } from "@/config/system/stringConst";
 import ButtonsGroup from "./ButtonsGroup";
 import CollapseActions from "./CollapseActions";
-import style from "./style.module.css";
 import InputSuggestions from "./InputSuggestions/input";
-import { stringConst } from "@/config/system/stringConst";
+import style from "./style.module.css";
 
 type SearchBarProps = {
   setIsBoardDeleted: React.Dispatch<React.SetStateAction<boolean>>;
