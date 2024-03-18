@@ -3,9 +3,9 @@
 import { useEffect, useState } from "react";
 import { useParams, useRouter, useSearchParams } from "next/navigation";
 import dbAPI from "@/dbAPI";
+import { BoardContext } from "@/context/Board";
 import TaskModal from "@/components/TaskModal";
 import { BoardType, sampleBoard } from "@/config/system/types/sampleBoard";
-import { BoardContext } from "../Home/hooks/useBoardContext";
 import boardShouldUpdateHandler from "@/functions/boardHandlers/boardShouldUpdateHandler";
 
 const TaskPage = () => {

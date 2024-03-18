@@ -1,9 +1,8 @@
-import { Board } from "@/mongoDB/models/boardsAndTasks";
-import connectToMongoDb from "@/mongoDB/connect";
 import { NextRequest, NextResponse } from "next/server";
+import connectToMongoDb from "@/mongoDB/connect";
+import { Board } from "@/mongoDB/models/boardsAndTasks";
 
 export async function POST(request: NextRequest) {
-  // TODO: figure out which type is here
   const myData = await request.json();
   await connectToMongoDb();
   console.log(myData);

@@ -1,5 +1,4 @@
-import { BoardType, defaultBoard } from "@/config/system/types/sampleBoard";
-import mongoose from "mongoose";
+import { BoardType } from "@/config/system/types/sampleBoard";
 
 const findOne = async (id: string): Promise<BoardType> => {
   try {

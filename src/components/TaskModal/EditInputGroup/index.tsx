@@ -1,10 +1,10 @@
-import EditInput from "./EditInput";
-import style from "./style.module.css";
 import { CommonStringObj } from "@/config/system/types/generalTypes";
 import {
   HandleBlurType,
   HandleChangeType,
 } from "@/config/system/types/formikHandlersTypes";
+import EditInput from "./EditInput";
+import style from "./style.module.css";
 
 type InputGroupProps = {
   touched: CommonStringObj;

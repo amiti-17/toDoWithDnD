@@ -1,8 +1,8 @@
 import { FormikErrors } from "formik";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
-import updateOrCreateTaskFunction from "../../components/TaskModal/updateOrCreateTaskFunction";
-import { EditFormType } from "@/config/system/types/editFormType";
 import { BoardType } from "@/config/system/types/sampleBoard";
+import { EditFormType } from "@/config/system/types/editFormType";
+import updateOrCreateTaskFunction from "@/components/TaskModal/updateOrCreateTaskFunction";
 
 type HandleEditFormProps = {
   values: EditFormType;
@@ -14,7 +14,6 @@ type HandleEditFormProps = {
   router: AppRouterInstance;
   backLink: string;
   setBoard: React.Dispatch<React.SetStateAction<BoardType>>;
-  // setIsModalActive: React.Dispatch<React.SetStateAction<boolean>>;
   setIsBoardShouldUpdate: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
@@ -28,7 +27,6 @@ const handleEditForm = async ({
   router,
   backLink,
   setBoard,
-  // setIsModalActive,
   setIsBoardShouldUpdate,
 }: HandleEditFormProps) => {
   if (!errors.title && !errors.description) {

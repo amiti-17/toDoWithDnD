@@ -1,10 +1,10 @@
+import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 import {
   BoardErrorType,
   BoardType,
   defaultBoard,
 } from "@/config/system/types/sampleBoard";
 import dbAPI from "@/dbAPI";
-import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 
 type BoardInitialHandlerProps = {
   boardId: string;

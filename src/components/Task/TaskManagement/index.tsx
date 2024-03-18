@@ -3,7 +3,7 @@ import { useContext } from "react";
 import { MdEditSquare } from "react-icons/md";
 import { HiArchiveBoxXMark } from "react-icons/hi2";
 import { FaLongArrowAltLeft, FaLongArrowAltRight } from "react-icons/fa";
-import { BoardContext } from "@/myPages/Home/hooks/useBoardContext";
+import { BoardContext } from "@/context/Board";
 import { columnInit } from "@/config/system/columnNames";
 import { BoardType } from "@/config/system/types/sampleBoard";
 import style from "./style.module.css";

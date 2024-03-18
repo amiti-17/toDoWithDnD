@@ -1,6 +1,6 @@
+import { DropResult } from "@hello-pangea/dnd";
 import { columnInit } from "@/config/system/columnNames";
 import { BoardType } from "@/config/system/types/sampleBoard";
-import { DropResult } from "@hello-pangea/dnd";
 
 type OnDragEndProps = {
   result: DropResult;

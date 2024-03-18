@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
+import Task from "@/components/Task";
+import { BoardContext } from "@/context/Board";
 import { columnInit } from "@/config/system/columnNames";
 import { Title as ColumnIndex } from "@/config/system/columnNames";
-import style from "./style.module.css";
 import DroppableArea from "./DroppableArea";
 import TaskCommands from "./TaskCommands";
-import { BoardContext } from "@/myPages/Home/hooks/useBoardContext";
-import Task from "@/components/Task";
+import style from "./style.module.css";
 
 type SubBoardProps = {
   columnId: number;

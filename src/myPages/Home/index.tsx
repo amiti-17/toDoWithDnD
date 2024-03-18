@@ -2,16 +2,16 @@
 
 import React, { useEffect, useState } from "react";
 import { useRouter, useParams, useSearchParams } from "next/navigation";
-import { BoardType, sampleBoard } from "@/config/system/types/sampleBoard";
+import { BoardContext } from "@/context/Board";
 import TaskModal from "@/components/TaskModal";
 import SearchBar from "@/components/SearchBar.tsx";
 import BoardsSection from "@/components/BoardSection";
 import LoadingCircle from "@/components/LoadingCircle";
-import { BoardContext } from "./hooks/useBoardContext";
+import { BoardType, sampleBoard } from "@/config/system/types/sampleBoard";
+import boardInitialHandler from "@/functions/boardHandlers/boardInitialHandler";
+import boardShouldUpdateHandler from "@/functions/boardHandlers/boardShouldUpdateHandler";
 import getTaskPropsFromSearchParams from "./getTaskPropsFromSearchParams";
 import style from "./style.module.css";
-import boardShouldUpdateHandler from "@/functions/boardHandlers/boardShouldUpdateHandler";
-import boardInitialHandler from "@/functions/boardHandlers/boardInitialHandler";
 
 const Home = () => {
   const [board, setBoard] = useState<BoardType>(sampleBoard);

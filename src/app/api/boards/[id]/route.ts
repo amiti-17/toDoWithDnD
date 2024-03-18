@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
+import { NextRequest, NextResponse } from "next/server";
 import connectToMongoDb from "@/mongoDB/connect";
 import { Board } from "@/mongoDB/models/boardsAndTasks";
-import { NextRequest, NextResponse } from "next/server";
 
 export async function PUT(
   request: NextRequest,

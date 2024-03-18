@@ -5,6 +5,7 @@
 }
 
 .submitButton {
+  cursor: pointer;
   min-width: 80px;
   width: 15%;
   height: 90%;

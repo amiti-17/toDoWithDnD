@@ -4,12 +4,12 @@ import {
   OnBeforeCaptureResponder,
   OnDragEndResponder,
 } from "@hello-pangea/dnd";
-import SubBoard from "./SubBoard";
+import { BoardContext } from "@/context/Board";
 import { columnInit } from "@/config/system/columnNames";
-import { BoardContext } from "@/myPages/Home/hooks/useBoardContext";
-import style from "./style.module.css";
+import ErrorComponent from "@/components/ErrorComponent";
+import SubBoard from "./SubBoard";
 import onDragEndHandler from "./onDragEndHandler";
-import ErrorComponent from "../ErrorComponent";
+import style from "./style.module.css";
 
 type BoardsSectionProps = {
   isDeleted: boolean;

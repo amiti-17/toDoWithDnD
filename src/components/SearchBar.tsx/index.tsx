@@ -1,14 +1,16 @@
 "use client";
 
-import { useContext, useState } from "react";
-import { useRouter } from "next/navigation";
 import mongoose from "mongoose";
+import { useRouter } from "next/navigation";
+import { useContext, useState } from "react";
 import { Formik, FormikErrors } from "formik";
 import dbAPI from "@/dbAPI";
+import { BoardContext } from "@/context/Board";
 import ButtonsGroup from "./ButtonsGroup";
 import CollapseActions from "./CollapseActions";
-import { BoardContext } from "@/myPages/Home/hooks/useBoardContext";
 import style from "./style.module.css";
+import InputSuggestions from "./InputSuggestions/input";
+import { stringConst } from "@/config/system/stringConst";
 
 type SearchBarProps = {
   setIsBoardDeleted: React.Dispatch<React.SetStateAction<boolean>>;
@@ -72,12 +74,14 @@ export default function SearchBar({ setIsBoardDeleted }: SearchBarProps) {
               <input
                 type="text"
                 name="idField"
+                list={stringConst.inputListId}
                 onChange={handleChange}
                 onBlur={handleBlur}
                 value={values.idField}
                 className={`${style.input} ${style.formElements}`}
                 placeholder="Search board by id..."
               />
+              <InputSuggestions id={stringConst.inputListId} />
               <div className={style.errorWrapper}>
                 {touched.idField && errors.idField}
               </div>

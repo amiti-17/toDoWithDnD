@@ -1,6 +1,6 @@
-import { BoardType } from "@/config/system/types/sampleBoard";
-import dbAPI from "@/dbAPI";
 import React from "react";
+import dbAPI from "@/dbAPI";
+import { BoardType } from "@/config/system/types/sampleBoard";
 
 type BoardShouldUpdateHandlerProps = {
   isBoardShouldUpdate: boolean;
